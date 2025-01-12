@@ -1,0 +1,45 @@
+
+.Bell{
+  font-size: 20px;
+  color:white;
+}
+
+.NotificationCount{
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  font-size: 8px;
+  font-weight: bold;
+  background:red;
+  color: white;
+  font:bold;
+  top:0;
+  right: 0;
+  text-align: center;
+  justify-content: center;
+
+}
+
+
+.MainContainer{
+  background: #fefbfb;
+  min-height: 490px;
+}
+
+
+.custom-select {
+  content: '▼';
+  direction: rtl; 
+  width: 100%;
+  padding: 10px;
+  text-align: left; 
+  background: #d9d9d9;
+}
+.custom-select option:hover {
+  background-color: #f1f1f1;
+}
+
+.logoGOV{
+  width:54px;
+}
