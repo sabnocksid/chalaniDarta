@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import { FaHome, FaSearch, FaDownload, FaUpload, FaFileDownload, FaFileUpload, FaFile, FaBook, FaFolder, FaFolderOpen, FaCalendarAlt, FaRegBuilding, FaMapMarkerAlt, FaAngleLeft } from 'react-icons/fa';
+import { FaHome, FaSearch, FaDownload, FaUpload, FaFile, FaBook, FaFolder, FaFolderOpen, FaCalendarAlt, FaRegBuilding, FaMapMarkerAlt, FaAngleLeft } from 'react-icons/fa';
 
 const Sidebar = () => {
   const location = useLocation();
@@ -15,8 +15,8 @@ const Sidebar = () => {
     else if (path === '/documents') setActiveItem('documents');
     else if (path === '/allDartaPapers') setActiveItem('allDartaPapers');
     else if (path === '#allProcessDocuments') setActiveItem('allProcessDocuments');
-    else if (path === '#dms') setActiveItem('dms');
-    else if (path === '#dmsArchive') setActiveItem('dmsArchive');
+    // else if (path === '#dms') setActiveItem('dms');
+    // else if (path === '#dmsArchive') setActiveItem('dmsArchive');
     else if (path === '#documentTypes') setActiveItem('documentTypes');
     else if (path === '#financialYear') setActiveItem('financialYear');
     else if (path === '#branch') setActiveItem('branch');
@@ -43,8 +43,8 @@ const Sidebar = () => {
             { id: 'documents', icon: <FaBook />, label: 'सबै पत्रहरू', link: '/documents' },
             { id: 'allRegisteredDocuments', icon: <FaFolder />, label: 'सबै दर्ता पत्रहरू', link: '#allRegisteredDocuments' },
             { id: 'allProcessDocuments', icon: <FaFolderOpen />, label: 'सबै चलानी पत्रहरू', link: '#allProcessDocuments' },
-            { id: 'dms', icon: <FaFileDownload />, label: 'DMS', link: '#dms' },
-            { id: 'dmsArchive', icon: <FaFileUpload />, label: 'DMS Archive', link: '#dmsArchive' },
+            // { id: 'dms', icon: <FaFileDownload />, label: 'DMS', link: '#dms' },
+            // { id: 'dmsArchive', icon: <FaFileUpload />, label: 'DMS Archive', link: '#dmsArchive' },
             { id: 'documentTypes', icon: <FaFile />, label: 'कागजातको प्रकार', link: '#documentTypes' },
             { id: 'financialYear', icon: <FaCalendarAlt />, label: 'आर्थिक वर्ष', link: '#financialYear' },
             { id: 'branch', icon: <FaRegBuilding />, label: 'शाखा', link: '#branch' },
