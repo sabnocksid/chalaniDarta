@@ -1,5 +1,9 @@
 import  { useState } from 'react';
 import { FaTh } from 'react-icons/fa';
+import Datepicker from './UI/Datepicker';
+
+
+
 
 const Search = () => {
   const [formData, setFormData] = useState({
@@ -22,45 +26,33 @@ const Search = () => {
   };
 
   return (
-    <div className='p-4 bg-slate-100 shadow-sm'>
-      <div className='w-100 mt-2 bg-gray-50'>
+    <div className='p-2 bg-slate-100 shadow-sm h-120'>
+      <div className='w-100 mt-1 bg-gray-50'>
         <table className="w-full bg-slate-300">
           <thead>
-            <tr className='h-10'>
-              <th className='w-14 p-6 col-span-1'>
+            <tr className='h-7'>
+              <th className='w-14 p-4 col-span-1'>
                 <FaTh />
               </th>
-              <th className='text-left p-5 col-span-7'>
+              <th className='text-left text-sm p-4 col-span-7'>
                 अग्रिम खोज रिपोर्ट
               </th>
             </tr>
           </thead>
         </table>
 
-        <div className="flex gap-4 mt-7 px-4 text-sm">
-          <div className='block'>
+        <div className="flex gap-4 mt-3 px-4 text-sm">
+          <div className='block '>
             <label className="font-semibold " htmlFor="from">मिति (from)</label>
-          <input
-            type="date"
-            name="date1"
-            value={formData.date1}
-            onChange={handleChange}
-            className="w-full p-2 border border-gray-300 rounded"
-          />
+            <Datepicker/>
           </div>
-          <div className='block'>
+          <div className='block px-20'>
           <label className="font-semibold" htmlFor="to">मिति (to)</label>
-          <input
-            type="date"
-            name="date2"
-            value={formData.date2}
-            onChange={handleChange}
-            className="w-full p-2 border border-gray-300 rounded"
-          />
+           <Datepicker />
           </div>
         </div>
 
-        <div className="flex gap-4 mt-7 px-4 text-sm">
+        <div className="flex gap-4 mt-10 px-4 text-sm">
         <div className='block'>
         <label htmlFor="paperType" className="font-semibold">कागजत वर्ग</label>
           
@@ -106,7 +98,7 @@ const Search = () => {
         </div>
         </div>
 
-        <div className="flex gap-4 mt-7 px-4 text-sm">
+        <div className="flex gap-4 mt-10 px-4 text-sm">
         <div className='block'>
         <label htmlFor="DartaNo" className="font-semibold">दर्ता नम्बर</label>
           <input
@@ -141,7 +133,7 @@ const Search = () => {
           />
           </div>
         </div>
-        <div className='mt-5 p-4 text-sm'>
+        <div className='mt-10 p-4 text-sm'>
             <button className='bg-orange-400 text-emerald-50 p-2'>Search</button>
         </div>
       </div>
