@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom'; 
+import { useLocation } from 'react-router-dom';
 import { FaHome, FaSearch, FaDownload, FaUpload, FaFileDownload, FaFileUpload, FaFile, FaBook, FaFolder, FaFolderOpen, FaCalendarAlt, FaRegBuilding, FaMapMarkerAlt, FaAngleLeft } from 'react-icons/fa';
 
 const Sidebar = () => {
-  const location = useLocation(); 
+  const location = useLocation();
   const [activeItem, setActiveItem] = useState('');
 
   useEffect(() => {
@@ -50,16 +50,15 @@ const Sidebar = () => {
             { id: 'branch', icon: <FaRegBuilding />, label: 'शाखा', link: '#branch' },
             { id: 'office', icon: <FaMapMarkerAlt />, label: 'कार्यालय', link: '#office' },
           ].map(({ id, icon, label, link }) => (
-            <li
-              key={id}
-              className={`border-y border-gray-300 text-white text-center text-sm py-2 px-10 hover:bg-black flex items-center ${activeItem === id ? 'bg-gray-800' : ''}`}
-              onClick={() => setActiveItem(id)}
-            >
-              <a href={link} className="flex items-center justify-start gap-2 text-left">
+            <li key={id} className={`border-y border-gray-300 text-sm ${activeItem === id ? 'bg-gray-800' : ''}`}>
+              <a
+                href={link}
+                className="flex items-center justify-start gap-2 py-2 px-4 text-white hover:bg-black"
+                onClick={() => setActiveItem(id)}
+              >
                 {icon} {label}
+                {activeItem === id && <FaAngleLeft className="ml-auto" />}
               </a>
-
-              {activeItem === id && <FaAngleLeft className="ml-auto" />}
             </li>
           ))}
         </ul>
