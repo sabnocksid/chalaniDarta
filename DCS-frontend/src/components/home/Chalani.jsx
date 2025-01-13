@@ -1,18 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { FaTh } from 'react-icons/fa';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 
 const Chalani = () => {
-  const [tableData, setTableData] = useState([
-    { no: 1, year: '२०७९/८०', category: 'पत्र', office: 'अर्थ मन्त्रालय', address: 'काठमाडौँ', subject: 'बजेट', date: '२०७९-०१-०१', remark: 'तुरुन्त', status: 'कर्बाही भएको' },
-    { no: 1, year: '२०७९/८०', category: 'पत्र', office: 'अर्थ मन्त्रालय', address: 'काठमाडौँ', subject: 'बजेट', date: '२०७९-०१-०१', remark: 'तुरुन्त', status: 'कर्बाही भएको' },
-    { no: 1, year: '२०७९/८०', category: 'पत्र', office: 'अर्थ मन्त्रालय', address: 'काठमाडौँ', subject: 'बजेट', date: '२०७९-०१-०१', remark: 'तुरुन्त', status: 'कर्बाही भएको' },
-    { no: 1, year: '२०७९/८०', category: 'पत्र', office: 'अर्थ मन्त्रालय', address: 'काठमाडौँ', subject: 'बजेट', date: '२०७९-०१-०१', remark: 'तुरुन्त', status: 'कर्बाही भएको' },
-    { no: 1, year: '२०७९/८०', category: 'पत्र', office: 'अर्थ मन्त्रालय', address: 'काठमाडौँ', subject: 'बजेट', date: '२०७९-०१-०१', remark: 'तुरुन्त', status: 'कर्बाही भएको' },
-
-  ]);
-  
+  const [tableData, setTableData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const rowsPerPage = 2; 
+  const rowsPerPage = 2;
+
+  useEffect(() => {
+    axios.get('http://localhost:5000/chalanis')
+      .then((response) => {
+        setTableData(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
+  }, []);
 
   // Pagination logic
   const indexOfLastRow = currentPage * rowsPerPage;
@@ -74,14 +78,14 @@ const Chalani = () => {
                   <td className="border px-4 py-2">{item.year}</td>
                   <td className="border px-4 py-2">{item.category}</td>
                   <td className="border px-4 py-2">{item.office}</td>
-                  <td className="border px-4 py-2">{item.address}</td>
-                  <td className="border px-4 py-2">{item.subject}</td>
+                  <td className="border px-4 py-2">{item.chalaniNo}</td>
                   <td className="border px-4 py-2">{item.date}</td>
                   <td className="border px-4 py-2">{item.remark}</td>
+                  <td className="border px-4 py-2">{item.status}</td>
                   <td className="border px-4 py-2">
-                    <a className='view bg-blue-500 text-white font-bold p-1' href='#view'>View</a>
-                    <a className='done bg-green-500 text-white font-bold p-1 ml-2' href='#done'>Done</a>
-                    <a className='delete bg-red-500 text-white font-bold p-1 ml-2' href='#delete'>Delete</a>
+                    <Link to={`/`} className="delete bg-blue-500 text-white font-bold p-1 ">View</Link>
+                    <Link to={`/`} className="delete bg-green-500 text-white font-bold p-1 ml-2">Done</Link>
+                    <Link to={`/`} className="delete bg-red-500 text-white font-bold p-1 ml-2">Delete</Link>
                   </td>
                 </tr>
               ))

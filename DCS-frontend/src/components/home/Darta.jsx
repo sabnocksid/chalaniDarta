@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { FaTh } from 'react-icons/fa';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-// import AddDarta from '../Dartas/createDarta';
 
 const Darta = () => {
   const [tableData, setTableData] = useState([]);
@@ -93,9 +92,9 @@ const Darta = () => {
                   <td className="border px-4 py-2">{item.remark}</td>
                   <td className="border px-4 py-2">{item.status}</td>
                   <td className="border px-4 py-2" >
-                    <button className="view bg-blue-500 text-white font-bold ">View</button>
-                    <button className="done bg-green-500 text-white font-bold ml-2 ">Done</button>
-                    <button className="delete bg-red-500 text-white font-bold ml-2">Delete</button>
+                    <Link to={`/${item.id}`} className="delete bg-blue-500 text-white font-bold p-1 ">View</Link>
+                    <Link to={`/${item.id}`} className="delete bg-green-500 text-white font-bold p-1 ml-2">Done</Link>
+                    <Link to={`/removeDarta/${item.id}`} className="delete bg-red-500 text-white font-bold p-1 ml-2">Delete</Link>
                   </td>
                 </tr>
               ))

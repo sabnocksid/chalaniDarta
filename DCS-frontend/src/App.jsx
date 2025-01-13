@@ -9,6 +9,7 @@ import Chalani from './components/home/Chalani';
 import Darta from './components/home/Darta';
 import Search from './components/home/search';
 import AddDarta from './components/Dartas/createDarta';
+import DartaRemove from './components/Dartas/removeDarta';
 // import allDartaPapers from './components/home/allDartaPapers';
 
 import './app.css';
@@ -28,6 +29,7 @@ function App() {
                  <Route path="/chalani" element={<div className='MainContainer'><Chalani/></div>} />
                  <Route path="/darta" element={<div className='MainContainer'><Darta/></div>} />
                  <Route path="/addDarta" element={<div className='MainContainer'><AddDarta /></div>} />
+                 <Route path="/removeDarta/:id" element={<div className='MainContainer'><DartaRemove/></div>} />
                  <Route path="/search" element={<div className='MainContainer'><Search/></div>} />
                  <Route path="/allDartaPapers" element={<div className='MainContainer'><allDartaPapers/></div>} />
              </Routes>

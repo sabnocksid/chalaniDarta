@@ -85,9 +85,9 @@ const Documents = () => {
                 <td className="border px-4 py-2">{item.date}</td>
                 <td className="border px-4 py-2">{item.remark}</td>
                 <td className="border px-4 py-2">{item.status}</td>
-                <td className="border px-4 py-2">
+                <td className="border w-32">
                     <a href="#edit" className="bg-blue-600 px-2 py-1 mr-1 font-semibold text-white">Edit</a>
-                    <a href="#view" className="bg-green-600 px-2 py-1 font-semibold text-white">View()</a>
+                    <a href="#view" className="bg-green-600 px-2 py-1 font-thin text-xs text-white">विवरण हर्नुहोस</a>
                 </td>
               </tr>
             ))

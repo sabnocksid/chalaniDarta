@@ -44,6 +44,8 @@ const Header = () => {
         return (
           <span>
             <a className="text-blue-500 hover:underline cursor-pointer" href='/'>Home</a>
+            <span className="mx-2"> &gt; </span>
+            <span className="font-bold text-sm text-gray-700">अग्रिम खोज रिपोर्ट</span>
           </span>
         );
       default:

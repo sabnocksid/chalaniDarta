@@ -1,5 +1,5 @@
 export const createDarta = (data) => {
-    return fetch("http://localhost:5000/dartas", {
+    return fetch("http://localhost:5000/chalanis", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -11,7 +11,7 @@ export const createDarta = (data) => {
   };
   
   export const deleteDarta = (id) => {
-    return fetch(`http://localhost:5000/dartas/${id}`, {
+    return fetch(`http://localhost:5000/chalanis/${id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",

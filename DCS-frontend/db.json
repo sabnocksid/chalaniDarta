@@ -1,64 +1,207 @@
 {
-  "dartas": [
-    {
-      "id": 1,
-      "year": "79/80",
-      "dartaNo": "130",
-      "topic": "lorem ipsum dolor sit amet",
-      "sendOffice": "office1",
-      "date": "2081/03/07",
-      "remark": "urgent",
-      "status": "Pending"
-    },
-    {
-      "id": 2,
-      "year": "80/81",
-      "dartaNo": "793",
-      "topic": "ipsum lorem dolor sit amet",
-      "sendOffice": "office2",
-      "date": "2081/05/13",
-      "remark": "normal",
-      "status": "Completed"
-    },
-    {
-      "id": 3,
-      "year": "79/80",
-      "dartaNo": "130",
-      "topic": "lorem ipsum dolor sit amet",
-      "sendOffice": "office1",
-      "date": "2081/03/07",
-      "remark": "urgent",
-      "status": "Pending"
-    },
-    {
-      "id": 4,
-      "year": "79/80",
-      "dartaNo": "130",
-      "topic": "lorem ipsum dolor sit amet",
-      "sendOffice": "office1",
-      "date": "2081/03/07",
-      "remark": "urgent",
-      "status": "Pending"
-    },
-    {
-      "id": "1446",
-      "year": "2081",
-      "dartaNo": "465",
-      "topic": "lorem",
-      "sendOffice": "",
-      "date": "",
-      "remark": "",
-      "status": ""
-    },
-    {
-      "id": "27c0",
-      "year": "2081",
-      "dartaNo": "465",
-      "topic": "lorem",
-      "sendOffice": "",
-      "date": "",
-      "remark": "",
-      "status": ""
-    }
-  ]
-}
+    "dartas": [
+      {
+        "id": 1,
+        "year": "79/80",
+        "dartaNo": "130",
+        "topic": "lorem ipsum dolor sit amet",
+        "sendOffice": "office1",
+        "date": "2081/03/07",
+        "remark": "urgent",
+        "status": "Pending"
+      },
+      {
+        "id": 2,
+        "year": "80/81",
+        "dartaNo": "793",
+        "topic": "ipsum lorem dolor sit amet",
+        "sendOffice": "office2",
+        "date": "2081/05/13",
+        "remark": "normal",
+        "status": "Completed"
+      },
+      {
+        "id": 3,
+        "year": "79/80",
+        "dartaNo": "130",
+        "topic": "lorem ipsum dolor sit amet",
+        "sendOffice": "office1",
+        "date": "2081/03/07",
+        "remark": "urgent",
+        "status": "Pending"
+      },
+      {
+        "id": 4,
+        "year": "79/80",
+        "dartaNo": "131",
+        "topic": "consectetur adipiscing elit",
+        "sendOffice": "office3",
+        "date": "2081/06/10",
+        "remark": "normal",
+        "status": "Completed"
+      },
+      {
+        "id": 5,
+        "year": "80/81",
+        "dartaNo": "794",
+        "topic": "sed do eiusmod tempor incididunt",
+        "sendOffice": "office4",
+        "date": "2081/07/15",
+        "remark": "urgent",
+        "status": "Pending"
+      },
+      {
+        "id": 6,
+        "year": "81/82",
+        "dartaNo": "795",
+        "topic": "ut labore et dolore magna aliqua",
+        "sendOffice": "office5",
+        "date": "2081/09/20",
+        "remark": "normal",
+        "status": "Completed"
+      },
+      {
+        "id": 7,
+        "year": "82/83",
+        "dartaNo": "796",
+        "topic": "quis nostrud exercitation ullamco laboris",
+        "sendOffice": "office6",
+        "date": "2081/10/01",
+        "remark": "urgent",
+        "status": "Pending"
+      },
+      {
+        "id": 8,
+        "year": "82/83",
+        "dartaNo": "797",
+        "topic": "nisi ut aliquip ex ea commodo consequat",
+        "sendOffice": "office7",
+        "date": "2081/11/10",
+        "remark": "normal",
+        "status": "Completed"
+      },
+      {
+        "id": 9,
+        "year": "83/84",
+        "dartaNo": "798",
+        "topic": "duis aute irure dolor in reprehenderit",
+        "sendOffice": "office8",
+        "date": "2082/01/12",
+        "remark": "urgent",
+        "status": "Pending"
+      },
+      {
+        "id": 10,
+        "year": "84/85",
+        "dartaNo": "799",
+        "topic": "in voluptate velit esse cillum dolore",
+        "sendOffice": "office9",
+        "date": "2082/02/25",
+        "remark": "normal",
+        "status": "Completed"
+      }
+    ],
+    "chalanis": [
+        {
+            "no": 1,
+            "year": "२०७९/८०",
+            "category": "पत्र",
+            "office": "अर्थ मन्त्रालय",
+            "chalaniNo": "01",
+            "date": "२०७९-०१-०१",
+            "remark": "तुरुन्त",
+            "status": "कर्बाही भएको"
+          },
+          {
+            "no": 2,
+            "year": "२०७९/८०",
+            "category": "पत्र",
+            "office": "अर्थ मन्त्रालय",
+            "chalaniNo": "02",
+            "date": "२०७९-०१-०२",
+            "remark": "तुरुन्त",
+            "status": "कर्बाही भएको"
+          },
+          {
+            "no": 3,
+            "year": "२०७९/८०",
+            "category": "पत्र",
+            "office": "श्रम मन्त्रालय",
+            "chalaniNo": "03",
+            "date": "२०७९-०२-१५",
+            "remark": "सामान्य",
+            "status": "पढिएको"
+          },
+          {
+            "no": 4,
+            "year": "२०७९/८०",
+            "category": "पत्र",
+            "office": "स्वास्थ्य मन्त्रालय",
+            "chalaniNo": "04",
+            "date": "२०७९-०३-१०",
+            "remark": "अत्यावश्यक",
+            "status": "पढिएको"
+          },
+          {
+            "no": 5,
+            "year": "२०७९/८०",
+            "category": "पत्र",
+            "office": "शिक्षा मन्त्रालय",
+            "chalaniNo": "05",
+            "date": "२०७९-०४-२५",
+            "remark": "अत्यावश्यक",
+            "status": "कर्बाही भएको"
+          },
+          {
+            "no": 6,
+            "year": "२०७९/८०",
+            "category": "पत्र",
+            "office": "कृषि मन्त्रालय",
+            "chalaniNo": "06",
+            "date": "२०७९-०५-१५",
+            "remark": "तुरुन्त",
+            "status": "पढिएको"
+          },
+          {
+            "no": 7,
+            "year": "२०८०/८१",
+            "category": "पत्र",
+            "office": "जलवायु परिवर्तन मन्त्रालय",
+            "chalaniNo": "07",
+            "date": "२०८०-०१-१०",
+            "remark": "सामान्य",
+            "status": "कर्बाही भएको"
+          },
+          {
+            "no": 8,
+            "year": "२०८०/८१",
+            "category": "पत्र",
+            "office": "स्वास्थ्य मन्त्रालय",
+            "chalaniNo": "08",
+            "date": "२०८०-०२-२०",
+            "remark": "तुरुन्त",
+            "status": "पढिएको"
+          },
+          {
+            "no": 9,
+            "year": "२०८०/८१",
+            "category": "पत्र",
+            "office": "शिक्षा मन्त्रालय",
+            "chalaniNo": "09",
+            "date": "२०८०-०३-१५",
+            "remark": "अत्यावश्यक",
+            "status": "कर्बाही भएको"
+          },
+          {
+            "no": 10,
+            "year": "२०८०/८१",
+            "category": "पत्र",
+            "office": "अर्थ मन्त्रालय",
+            "chalaniNo": "10",
+            "date": "२०८०-०४-०५",
+            "remark": "सामान्य",
+            "status": "पढिएको"
+          }
+    ]
+  }
+  

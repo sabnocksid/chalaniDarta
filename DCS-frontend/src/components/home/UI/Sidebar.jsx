@@ -50,7 +50,7 @@ const Sidebar = () => {
             { id: 'branch', icon: <FaRegBuilding />, label: 'शाखा', link: '#branch' },
             { id: 'office', icon: <FaMapMarkerAlt />, label: 'कार्यालय', link: '#office' },
           ].map(({ id, icon, label, link }) => (
-            <li key={id} className={`border-y border-gray-300 text-sm ${activeItem === id ? 'bg-gray-800' : ''}`}>
+            <li key={id} className={`border-y border-gray-300 text-md ${activeItem === id ? 'bg-gray-800' : ''}`}>
               <a
                 href={link}
                 className="flex items-center justify-start gap-2 py-2 px-4 text-white hover:bg-black"
