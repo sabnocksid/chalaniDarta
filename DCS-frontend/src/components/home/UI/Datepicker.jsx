@@ -1,25 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
 import NepaliDatepicker from 'nepali-datepicker-and-dateinput';
 
 const Datepicker = () => {
+  const [nepaliDate, setNepaliDate] = useState('');
 
   const handleDateChange = (name, dateInMilli, bsDate, adDate) => {
-    console.log(name); 
-    console.log(dateInMilli); 
-    console.log(bsDate); 
-    console.log(adDate); 
-  }
+    setNepaliDate(bsDate);
+    console.log('BS Date:', bsDate); 
+    console.log('AD Date:', adDate); 
+  };
 
   return (
-    <div className="calender-container bg-gray-100 ">
+    <div className="datepicker-container">
       <NepaliDatepicker
         id="nepali-date"
         onChange={handleDateChange}
-        defaultDate="{date}"
-        className="calender-body"
+        label="नेपाली मिति"  
+        defaultDate="{date}"  
+        className="nepali-datepicker"  
+        value={nepaliDate}
       />
+
     </div>
   );
-}
+};
 
 export default Datepicker;

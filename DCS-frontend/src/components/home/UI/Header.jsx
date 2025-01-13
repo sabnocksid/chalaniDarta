@@ -7,11 +7,11 @@ const Header = () => {
   const getPageTitle = (path) => {
     switch (path) {
       case '/':
-        return <span className="text-blue-500 hover:underline cursor-pointer">Home</span>;
+        return <a className="text-blue-500 hover:underline cursor-pointer" href="/">Home</a>;
       case '/documents':
         return (
           <span>
-            <span className="text-blue-500 hover:underline cursor-pointer">Home</span>
+            <a className="text-blue-500 hover:underline cursor-pointer" href="/">Home</a>
             <span className="mx-2"> &gt; </span>
             <span className="font-bold text-sm text-gray-700">कागजात व्यवस्थापन</span>
           </span>
@@ -19,7 +19,7 @@ const Header = () => {
       case '/chalani':
         return (
           <span>
-            <span className="text-blue-500 hover:underline cursor-pointer">Home</span>
+            <a className="text-blue-500 hover:underline cursor-pointer" href="/">Home</a>
             <span className="mx-2"> &gt; </span>
             <span className="font-bold text-sm text-gray-700">चलानी</span>
           </span>
@@ -27,15 +27,23 @@ const Header = () => {
       case '/darta':
         return (
           <span>
-            <span className="text-blue-500 hover:underline cursor-pointer">Home</span>
+            <a className="text-blue-500 hover:underline cursor-pointer"href="/" >Home</a>
             <span className="mx-2"> &gt; </span>
             <span className="font-bold text-sm text-gray-700">दर्ता</span>
+          </span>
+        );
+      case '/addDarta':
+        return (
+          <span>
+            <a className="text-blue-500 hover:underline cursor-pointer"href="/" >Home</a>
+            <span className="mx-2"> &gt; </span>
+            <span className="font-bold text-sm text-gray-700">थप्नुहोस्</span>
           </span>
         );
       case '/search':
         return (
           <span>
-            <span className="text-blue-500 hover:underline cursor-pointer">Home</span>
+            <a className="text-blue-500 hover:underline cursor-pointer" href='/'>Home</a>
           </span>
         );
       default:
