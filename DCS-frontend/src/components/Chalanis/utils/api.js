@@ -1,31 +1,19 @@
-export const createDarta = (data) => {
-    return fetch("http://localhost:5000/chalanis", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
+export const createChalanis = (formData) => {
+  return fetch("https://darta.bimal1412.com.np/api/v1/chalani/", {
+    method: "POST",
+    body: formData,
+  })
+    .then((response) => {
+      if (!response.ok) {
+        return response.json().then((data) => {
+          console.error("API Error:", data);  // Log the error detail from API
+          throw new Error(data.detail || "Failed to create Chalani");
+        });
+      }
+      return response.json();  // Return response data if successful
     })
-      .then((response) => response.json())
-      .catch((error) => console.error("Error creating Darta:", error));
-  };
-  
-  export const deleteDarta = (id) => {
-    return fetch(`http://localhost:5000/chalanis/${id}`, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Failed to delete Darta");
-        }
-        console.log('Delete Response:', response);
-        return response.json();
-      })
-      .catch((error) => {
-        console.error("Error deleting Darta:", error);
-      });
-  };
-  
+    .catch((error) => {
+      console.error("Error creating Chalani:", error);
+      throw error;  // Throw error for further handling
+    });
+};

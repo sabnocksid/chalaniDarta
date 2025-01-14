@@ -1,5 +1,5 @@
 import { useLocation } from 'react-router-dom';
-import {FaHome} from 'react-icons/fa';
+import { FaHome } from 'react-icons/fa';
 
 const Header = () => {
   const location = useLocation();
@@ -27,7 +27,7 @@ const Header = () => {
       case '/darta':
         return (
           <span>
-            <a className="text-blue-500 hover:underline cursor-pointer"href="/" >Home</a>
+            <a className="text-blue-500 hover:underline cursor-pointer" href="/" >Home</a>
             <span className="mx-2"> &gt; </span>
             <span className="font-bold text-sm text-gray-700">दर्ता</span>
           </span>
@@ -35,7 +35,7 @@ const Header = () => {
       case '/addDarta':
         return (
           <span>
-            <a className="text-blue-500 hover:underline cursor-pointer"href="/" >Home</a>
+            <a className="text-blue-500 hover:underline cursor-pointer" href="/" >Home</a>
             <span className="mx-2"> &gt; </span>
             <span className="font-bold text-sm text-gray-700">थप्नुहोस्</span>
           </span>
@@ -54,10 +54,12 @@ const Header = () => {
   };
 
   return (
-    <div className="bg-gray-200 shadow-sm h-14 flex  p-3">
-      <div className='HomeIcon p-2 text-gray-400 text-l'> <FaHome /></div>
+    <div className="bg-gray-200 shadow-sm h-auto flex p-3 flex-col ">
+      <div className='HomeIcon p-2 text-gray-400  text-l'>
+        <FaHome />
+      </div>
       
-      <h1 className="text-xl font-semibold text-gray-700">
+      <h1 className="text-xl md:text-sm sm:text-xs font-semibold text-gray-700 flex-grow text-center md:text-left sm:mt-0 md:mt-0">
         {getPageTitle(location.pathname)}
       </h1>
     </div>
@@ -65,5 +67,3 @@ const Header = () => {
 };
 
 export default Header;
-
-
