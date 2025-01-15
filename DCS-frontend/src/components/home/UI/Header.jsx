@@ -7,11 +7,11 @@ const Header = () => {
   const getPageTitle = (path) => {
     switch (path) {
       case '/':
-        return <a className="text-blue-500 hover:underline cursor-pointer" href="/">Home</a>;
+        return <a className="text-blue-500 hover:underline cursor-pointer font-bold" href="/">Home</a>;
       case '/documents':
         return (
           <span>
-            <a className="text-blue-500 hover:underline cursor-pointer" href="/">Home</a>
+            <a className="text-blue-500 hover:underline cursor-pointer font-bold" href="/">Home</a>
             <span className="mx-2"> &gt; </span>
             <span className="font-bold text-sm text-gray-700">कागजात व्यवस्थापन</span>
           </span>
@@ -19,7 +19,7 @@ const Header = () => {
       case '/chalani':
         return (
           <span>
-            <a className="text-blue-500 hover:underline cursor-pointer" href="/">Home</a>
+            <a className="text-blue-500 hover:underline cursor-pointer font-bold" href="/">Home</a>
             <span className="mx-2"> &gt; </span>
             <span className="font-bold text-sm text-gray-700">चलानी</span>
           </span>
@@ -27,7 +27,7 @@ const Header = () => {
       case '/darta':
         return (
           <span>
-            <a className="text-blue-500 hover:underline cursor-pointer" href="/" >Home</a>
+            <a className="text-blue-500 hover:underline cursor-pointe font-bold" href="/" >Home</a>
             <span className="mx-2"> &gt; </span>
             <span className="font-bold text-sm text-gray-700">दर्ता</span>
           </span>
@@ -35,7 +35,15 @@ const Header = () => {
       case '/addDarta':
         return (
           <span>
-            <a className="text-blue-500 hover:underline cursor-pointer" href="/" >Home</a>
+            <a className="text-blue-500 hover:underline cursor-pointer font-bold" href="/" >Home</a>
+            <span className="mx-2"> &gt; </span>
+            <span className="font-bold text-sm text-gray-700">थप्नुहोस्</span>
+          </span>
+        );
+      case '/addChalani':
+        return (
+          <span>
+            <a className="text-blue-500 hover:underline cursor-pointer font-bold" href="/" >Home</a>
             <span className="mx-2"> &gt; </span>
             <span className="font-bold text-sm text-gray-700">थप्नुहोस्</span>
           </span>
@@ -56,11 +64,13 @@ const Header = () => {
   return (     
 
     <div className="bg-gray-200 shadow-sm p-3 flex">
+      <div className="flex pl-4">
       <div className='p-4 text-xl'>
       <FaHome />
       </div>
       <div className='p-4'>
       {getPageTitle(location.pathname)}
+      </div>
       </div>
       </div>
   );

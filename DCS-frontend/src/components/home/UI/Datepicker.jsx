@@ -1,22 +1,24 @@
 import React, { useState } from 'react';
 import NepaliDatepicker from 'nepali-datepicker-and-dateinput';
 
-const DateInput = () => {
-  const [bsDate, setBsDate] = useState(''); 
+const DateInput = ({ onChange }) => {
+  const [formattedDate, setFormattedDate] = useState('');
 
   const handleDateChange = (name, dateInMilli, bsDate, adDate) => {
-    setBsDate(bsDate); 
+    const date = new Date(adDate);
+    const formattedISO = date.toISOString(); 
+    setFormattedDate(formattedISO);
+    onChange({ target: { name, value: formattedISO } });
   };
 
   return (
     <div className="datepicker-container">
       <NepaliDatepicker
         id="nepali-date"
-        onChange={handleDateChange}   
-        className="nepali-datepicker"  
-        value={bsDate}  
+        onChange={handleDateChange}
+        value={formattedDate} 
+        className="nepali-datepicker"
       />
-
     </div>
   );
 };

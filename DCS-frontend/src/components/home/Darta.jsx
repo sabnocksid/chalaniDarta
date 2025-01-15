@@ -13,6 +13,7 @@ const Darta = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        // axios.defaults.baseURL = 'https://darta.bimal1412.com.np'; 
         const response = await axios.get('/api/v1/darta/');
         setTableData(response.data);
         setLoading(false);

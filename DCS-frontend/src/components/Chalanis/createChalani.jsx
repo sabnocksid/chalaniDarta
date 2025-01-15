@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { createChalanis } from "./utils/api";
+import DateInput from "../home/UI/Datepicker";
 
 const CreateChalaniForm = () => {
   const [formData, setFormData] = useState({
@@ -19,6 +20,13 @@ const CreateChalaniForm = () => {
     setFormData((prev) => ({
       ...prev,
       [name]: type === "file" ? files[0] : value,
+    }));
+  };
+
+  const handleDateChange = (e) => {
+    setFormData((prev) => ({
+      ...prev,
+      sent_date: e.target.value,  
     }));
   };
 
@@ -89,12 +97,11 @@ const CreateChalaniForm = () => {
           >
             Sent Date
           </label>
-          <input
-            type="date"
+          <DateInput
             id="sent_date"
             name="sent_date"
             value={formData.sent_date}
-            onChange={handleChange}
+            onChange={handleDateChange}
             className="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
           />
         </div>

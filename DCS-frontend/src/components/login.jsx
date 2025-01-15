@@ -16,7 +16,12 @@ const LogIn = () => {
     try {
       const response = await axios.post(
         `https://darta.bimal1412.com.np/api/v1/login/`,
-        formData
+        formData,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
       );
 
       const { token } = response.data;

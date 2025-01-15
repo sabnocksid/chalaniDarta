@@ -1,11 +1,15 @@
-import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
-export default defineConfig({
+export default {
   plugins: [react()],
   server: {
     proxy: {
       '/api': 'https://darta.bimal1412.com.np',
     },
+    hmr: true, 
+    watch: {
+      usePolling: true, 
+    }
   },
-});
+  logLevel: 'info',
+};
