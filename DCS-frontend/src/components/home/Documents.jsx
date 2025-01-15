@@ -55,6 +55,7 @@ const Documents = () => {
        </table>
 
       </div>
+      <div className='overflow-x-auto'>
       <table className="table-auto w-full border-collapse border border-gray-300  text-xs">
         <div>
         </div>
@@ -100,6 +101,7 @@ const Documents = () => {
           )}
         </tbody>
       </table>
+      </div>
 
       {/* Pagination */}
       <div className="flex w-100 h-10 mt-10">

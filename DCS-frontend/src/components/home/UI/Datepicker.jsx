@@ -13,7 +13,7 @@ const DateInput = () => {
       <NepaliDatepicker
         id="nepali-date"
         onChange={handleDateChange}   
-        className="nepali-datepicker w-full"  
+        className="nepali-datepicker"  
         value={bsDate}  
       />
 

@@ -12,7 +12,6 @@ const Chalani = () => {
 
   useEffect(() => {
     const source = axios.CancelToken.source();
-
     const fetchData = async () => {
       try {
         const response = await axios.get('api/v1/chalani/', { cancelToken: source.token });
@@ -50,7 +49,6 @@ const Chalani = () => {
 
   return (
     <div className="max-h-full p-5">
-      {/* Button Group */}
       <div className="ButtonGroup flex">
         <Link to="/addChalani">
           <button className="bg-blue-500 text-white p-2 rounded-sm text-xs">थप्नुहोस्</button>
@@ -65,7 +63,6 @@ const Chalani = () => {
         </a>
       </div>
 
-      {/* Table */}
       <div className="p-4 bg-slate-100 mt-4 shadow-sm">
         <div className="w-100 mt-2">
           <table className="w-full bg-slate-300">
@@ -90,13 +87,12 @@ const Chalani = () => {
             <thead>
               <tr className="bg-slate-300">
                 <th className="border px-4 py-2">क्र.स.</th>
-                <th className="border px-4 py-2">आर्थिक वर्ष</th>
-                <th className="border px-4 py-2">विषय</th>
-                <th className="border px-4 py-2">कार्यालय</th>
-                <th className="border px-4 py-2">चलानी नं</th>
-                <th className="border px-4 py-2">पत्रको नेपाली मिति</th>
-                <th className="border px-4 py-2">कैफियत</th>
-                <th className="border px-4 py-2">कर्बाही भएको स्थिति</th>
+                <th className="border px-4 py-2">विषय (Subject)</th>
+                <th className="border px-4 py-2">पठाइएको मिति (Sent Date)</th>
+                <th className="border px-4 py-2">कागजात प्रकार (Document Type)</th>
+                <th className="border px-4 py-2">स्थिति (Status)</th>
+                <th className="border px-4 py-2">डॉकुमेन्ट फाइल (Document File)</th>
+                <th className="border px-4 py-2">सम्बन्धित कार्यालय (Related Office)</th>
                 <th className="border px-4 py-2">कार्य</th>
               </tr>
             </thead>
@@ -117,13 +113,13 @@ const Chalani = () => {
                 currentRows.map((item, index) => (
                   <tr key={index}>
                     <td className="border px-4 py-2">{index + 1 + (currentPage - 1) * rowsPerPage}</td>
-                    <td className="border px-4 py-2">{item.year}</td>
-                    <td className="border px-4 py-2">{item.category}</td>
-                    <td className="border px-4 py-2">{item.office}</td>
-                    <td className="border px-4 py-2">{item.chalaniNo}</td>
-                    <td className="border px-4 py-2">{item.date}</td>
-                    <td className="border px-4 py-2">{item.remark}</td>
+                    <td className="border px-4 py-2">{item.subject}</td>
+                    <td className="border px-4 py-2">{item.receiver_name}</td>
+                    <td className="border px-4 py-2">{item.sent_date}</td>
+                    <td className="border px-4 py-2">{item.documenr_type}</td>
                     <td className="border px-4 py-2">{item.status}</td>
+                    <td className="border px-4 py-2">{item.document_file}</td>
+                    <td className="border px-4 py-2">{item.related_office}</td>
                     <td className="border px-4 py-2">
                       <Link to={`/`} className="bg-blue-500 text-white font-bold p-1">
                         View
@@ -140,7 +136,7 @@ const Chalani = () => {
               ) : (
                 <tr>
                   <td className="border px-4 py-2 text-center" colSpan="9">
-                    कुनै रेकर्ड फेला परेन
+                    कुनै रेकर्ड फेला परेन (No Records Found)
                   </td>
                 </tr>
               )}
@@ -149,19 +145,37 @@ const Chalani = () => {
         </div>
 
         {/* Pagination */}
-        <div className="flex w-100 h-10 mt-10 justify-center">
-          {Array.from({ length: totalPages }, (_, i) => (
-            <button
-              key={i + 1}
-              onClick={() => handlePageChange(i + 1)}
-              className={`py-1 px-3 mx-1 rounded-lg font-bold ${
-                currentPage === i + 1 ? 'bg-cyan-500 text-white' : 'hover:bg-gray-400'
-              }`}
+        <div className="flex w-100 h-10 mt-10">
+        {Array.from({ length: totalPages }, (_, i) => (
+          <button
+            key={i + 1}
+            onClick={() => handlePageChange(i + 1)}
+            className={`py-1 px-3 ml-2 rounded-lg font-bold ${
+              currentPage === i + 1
+                ? 'bg-cyan-500 text-white'
+                : ' hover:bg-gray-400'
+            }`}
+          >
+            {i + 1}
+          </button>
+        ))}
+       <div className="items-center mt-1 space-x-2">
+       <button
+              className={` text-gray-400 font-bold py-1 px-3 ml-2 rounded-sm ${currentPage === 1 ? 'opacity-50 cursor-not-allowed' : ''}`}
+              onClick={() => handlePageChange(currentPage - 1)}
+              disabled={currentPage === 1}
             >
-              {i + 1}
+              Previous
             </button>
-          ))}
+            <button
+              className={`text-gray-400 font-bold py-1 px-3 rounded-sm ${currentPage === totalPages ? 'opacity-50 cursor-not-allowed' : ''}`}
+              onClick={() => handlePageChange(currentPage + 1)}
+              disabled={currentPage === totalPages}
+            >
+              Next
+            </button>
         </div>
+      </div>
       </div>
     </div>
   );

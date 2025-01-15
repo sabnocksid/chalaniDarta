@@ -43,8 +43,8 @@ const Header = () => {
       case '/search':
         return (
           <span>
-            <a className="text-blue-500 hover:underline cursor-pointer" href='/'>Home</a>
-            <span className="mx-2"> &gt; </span>
+            <a className="text-blue-500 hover:underline cursor-pointer font-bold" href='/'>Home</a>
+            <span className="mx-3"> &gt; </span>
             <span className="font-bold text-sm text-gray-700">अग्रिम खोज रिपोर्ट</span>
           </span>
         );
@@ -53,16 +53,16 @@ const Header = () => {
     }
   };
 
-  return (
-    <div className="bg-gray-200 shadow-sm h-auto flex p-3 flex-col ">
-      <div className='HomeIcon p-2 text-gray-400  text-l'>
-        <FaHome />
+  return (     
+
+    <div className="bg-gray-200 shadow-sm p-3 flex">
+      <div className='p-4 text-xl'>
+      <FaHome />
       </div>
-      
-      <h1 className="text-xl md:text-sm sm:text-xs font-semibold text-gray-700 flex-grow text-center md:text-left sm:mt-0 md:mt-0">
-        {getPageTitle(location.pathname)}
-      </h1>
-    </div>
+      <div className='p-4'>
+      {getPageTitle(location.pathname)}
+      </div>
+      </div>
   );
 };
 

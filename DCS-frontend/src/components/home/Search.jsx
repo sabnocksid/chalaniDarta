@@ -133,9 +133,8 @@ const Search = () => {
           </div>
         </div>
 
-        {/* Search Button */}
         <div className="mt-6 flex justify-center">
-          <button className="bg-orange-400 hover:bg-orange-500 text-white py-2 px-6 rounded-lg font-bold">
+          <button className="bg-orange-400 hover:bg-orange-500 text-white py-2 px-6 rounded-lg font-bold mb-3">
             Search
           </button>
         </div>
