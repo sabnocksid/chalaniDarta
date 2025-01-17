@@ -1,5 +1,7 @@
+import axios from "axios";
+
 export const createChalanis = (formData) => {
-  return fetch("https://darta.bimal1412.com.np/api/v1/chalani/", {
+  return fetch("/api/v1/chalani/", {
     method: "POST",
     body: formData,
   })
@@ -16,4 +18,20 @@ export const createChalanis = (formData) => {
       console.error("Error creating Chalani:", error);
       throw error;  // Throw error for further handling
     });
+};
+
+export const fetchDropdownOptions = async () => {
+  try {
+    const response = await fetch("/api/v1/chalani/"); // Replace with your actual API endpoint
+    const data = await response.json();
+    console.log("Dropdown options API response:", data); // Log the response
+    if (!data.status_options || !data.related_office_options) {
+      if (!data.status_options) console.warn("No status options found.");
+      if (!data.related_office_options) console.warn("No related office options found.");
+    }
+    return data;
+  } catch (error) {
+    console.error("Error fetching dropdown options:", error);
+    throw error;
+  }
 };

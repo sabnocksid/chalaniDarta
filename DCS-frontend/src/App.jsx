@@ -23,35 +23,33 @@ function App() {
 
   return (
     <div className="App">
-      {!isStandAlone && (
+      {!isStandAlone ? (
         <div className="flex md:flex-row flex-col">
           <div className="md:w-1/5 w-full">
             <Sidebar />
           </div>
-          
+
           <div className="w-full md:w-4/5">
             <div className="topSection w-full">
               <Navbar />
               <Header />
               <main className="px-4 md:px-8 py-4">
                 <Routes>
-                  <Route path="/" element={<div className="MainContainer"><Home /></div>} />
-                  <Route path="/documents" element={<div className="MainContainer"><Documents /></div>} />
-                  <Route path="/chalani" element={<div className="MainContainer"><Chalani /></div>} />
-                  <Route path="/addChalani" element={<div className="MainContainer"><CreateChalaniForm /></div>} />
-                  <Route path="/darta" element={<div className="MainContainer"><Darta /></div>} />
-                  <Route path="/addDarta" element={<div className="MainContainer"><AddDarta /></div>} />
-                  <Route path="/removeDarta/:id" element={<div className="MainContainer"><DartaRemove /></div>} />
-                  <Route path="/search" element={<div className="MainContainer"><Search /></div>} />
-                  <Route path="/allDartaPapers" element={<div className="MainContainer"><Home /></div>} />
+                  <Route path="/" element={<Home />} />
+                  <Route path="/documents" element={<Documents />} />
+                  <Route path="/chalani" element={<Chalani />} />
+                  <Route path="/addChalani" element={<CreateChalaniForm />} />
+                  <Route path="/darta" element={<Darta />} />
+                  <Route path="/addDarta" element={<AddDarta />} />
+                  <Route path="/removeDarta/:id" element={<DartaRemove />} />
+                  <Route path="/search" element={<Search />} />
+                  <Route path="/allDartaPapers" element={<Home />} />
                 </Routes>
               </main>
             </div>
           </div>
         </div>
-      )}
-
-      {isStandAlone && (
+      ) : (
         <Routes>
           <Route path="/login" element={<LogIn />} />
         </Routes>

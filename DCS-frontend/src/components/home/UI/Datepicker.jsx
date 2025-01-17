@@ -4,8 +4,8 @@ import NepaliDatepicker from 'nepali-datepicker-and-dateinput';
 const DateInput = ({ onChange }) => {
   const [formattedDate, setFormattedDate] = useState('');
 
-  const handleDateChange = (name, dateInMilli, bsDate, adDate) => {
-    const date = new Date(adDate);
+  const handleDateChange = (name, dateInMilli, bsDate) => {
+    const date = new Date(bsDate);
     const formattedISO = date.toISOString(); 
     setFormattedDate(formattedISO);
     onChange({ target: { name, value: formattedISO } });

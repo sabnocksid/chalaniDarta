@@ -1,8 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from 'react';
 import axiosInstance from "./utils/axios";
-import DateInput from "../home/UI/Datepicker"; 
+import DateInput from "../home/UI/Datepicker";
+import FetchSenderList from "../Sender/SenderList";
+import FetchReceiverList from "../Receiver/FetchReceiverList";
+import NepaliDate from 'nepali-date';
 
 const CreateDarta = () => {
+
   const [formData, setFormData] = useState({
     subject: "",
     sender_name: "",
@@ -16,22 +20,51 @@ const CreateDarta = () => {
     receiver_office: "",
   });
 
+  const [nepaliDate, setNepaliDate] = useState('');
+
+  useEffect(() => {
+    const today = new NepaliDate();
+    setNepaliDate(today.format('YYYY-MM-DD'));
+  }, []);
+
   const handleChange = (e) => {
-    const { name, value, type, files } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: type === "file" ? files[0] : value,
-    }));
- 
+    const { name, value, type, files, selectedOptions } = e.target;
+    
+  
+    if (type === "select-multiple") {
+      setFormData((prev) => ({
+        ...prev,
+        [name]: Array.from(selectedOptions).map((option) => option.value),
+      }));
+    } else {
+      setFormData((prev) => ({
+        ...prev,
+        [name]: type === "file" ? files[0] : value,
+      }));
+    }
   };
+
   const handleDateChange = (e) => {
     setFormData((prev) => ({
       ...prev,
       received_date: e.target.value,
-      letter_date: e.target.value, 
+      letter_date: e.target.value,
     }));
   };
 
+  const handleReceiverChange = (receiverOffices) => {
+    setFormData((prev) => ({
+      ...prev,
+      receiver_office: receiverOffices,
+    }));
+  };
+
+  const handleSenderChange = (senderOffices) => {
+    setFormData((prev) => ({
+      ...prev,
+      sender_office: senderOffices,
+    }));
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -74,6 +107,18 @@ const CreateDarta = () => {
             className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
             required
           />
+          <label className="block text-sm font-bold text-gray-700">दर्ता नं</label>
+          
+          <input
+            type="text"
+            name="DartaNo"
+            value={formData.subject}
+            onChange={handleChange}
+            placeholder='99999'
+            className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+            required
+            readOnly
+          />
         </div>
 
         <div>
@@ -90,7 +135,6 @@ const CreateDarta = () => {
 
         <div>
           <label className="block text-sm font-medium text-gray-700">Received Date</label>
-
           <DateInput
             id="received_date"
             name="received_date"
@@ -115,13 +159,14 @@ const CreateDarta = () => {
 
         <div>
           <label className="block text-sm font-medium text-gray-700">Letter Date</label>
-          <DateInput
+          <input
             id="letter_date"
             name="letter_date"
-            value={formData.letter_date}
+            value={nepaliDate}
             onChange={handleDateChange}
             className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
             required
+            readOnly
           />
         </div>
 
@@ -136,7 +181,6 @@ const CreateDarta = () => {
             <option value="">Select Document Type</option>
             <option value="1">Type 1</option>
             <option value="2">Type 2</option>
-            {/* Add more options as needed */}
           </select>
         </div>
 
@@ -167,32 +211,12 @@ const CreateDarta = () => {
 
         <div>
           <label className="block text-sm font-medium text-gray-700">Sender Office</label>
-          <select
-            name="sender_office"
-            value={formData.sender_office}
-            onChange={handleChange}
-            className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
-          >
-            <option value="">Select Sender Office</option>
-            <option value="1">Office 1</option>
-            <option value="2">Office 2</option>
-            {/* Add more options as needed */}
-          </select>
+              <FetchSenderList onSenderChange={handleSenderChange} />
         </div>
 
         <div>
           <label className="block text-sm font-medium text-gray-700">Receiver Office</label>
-          <select
-            name="receiver_office"
-            value={formData.receiver_office}
-            onChange={handleChange}
-            className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
-          >
-            <option value="0">Select Receiver Office</option>
-            <option value="1">Office A</option>
-            <option value="2">Office B</option>
-            {/* Add more options as needed */}
-          </select>
+          <FetchReceiverList onReceiverChange={handleReceiverChange} />
         </div>
 
         <button
@@ -203,6 +227,7 @@ const CreateDarta = () => {
         </button>
       </form>
     </div>
+  
   );
 };
 

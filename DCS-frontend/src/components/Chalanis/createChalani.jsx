@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { createChalanis } from "./utils/api";
 import DateInput from "../home/UI/Datepicker";
+import FetchReceiverList from "../Receiver/FetchReceiverList";
 
 const CreateChalaniForm = () => {
   const [formData, setFormData] = useState({
@@ -27,6 +28,13 @@ const CreateChalaniForm = () => {
     setFormData((prev) => ({
       ...prev,
       sent_date: e.target.value,  
+    }));
+  };
+
+  const handleReceiverChange = (receiverOffices) => {
+    setFormData((prev) => ({
+      ...prev,
+      related_office: receiverOffices,
     }));
   };
 
@@ -163,14 +171,7 @@ const CreateChalaniForm = () => {
           >
             Related Office
           </label>
-          <input
-            type="number"
-            id="related_office"
-            name="related_office"
-            value={formData.related_office}
-            onChange={handleChange}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
-          />
+          <FetchReceiverList onReceiverChange={handleReceiverChange}/>
         </div>
 
         {errorMessage && (
