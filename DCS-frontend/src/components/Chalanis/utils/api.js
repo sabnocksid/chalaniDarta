@@ -8,15 +8,15 @@ export const createChalanis = (formData) => {
     .then((response) => {
       if (!response.ok) {
         return response.json().then((data) => {
-          console.error("API Error:", data);  // Log the error detail from API
+          console.error("API Error:", data);  
           throw new Error(data.detail || "Failed to create Chalani");
         });
       }
-      return response.json();  // Return response data if successful
+      return response.json();  
     })
     .catch((error) => {
       console.error("Error creating Chalani:", error);
-      throw error;  // Throw error for further handling
+      throw error;  
     });
 };
 

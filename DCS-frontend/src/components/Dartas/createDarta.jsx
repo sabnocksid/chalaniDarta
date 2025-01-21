@@ -1,36 +1,57 @@
 import React, { useState, useEffect } from 'react';
 import axiosInstance from "./utils/axios";
 import DateInput from "../home/UI/Datepicker";
-import FetchSenderList from "../Sender/SenderList";
 import FetchReceiverList from "../Receiver/FetchReceiverList";
+import FetchSenderList from "../Sender/SenderList";
 import NepaliDate from 'nepali-date';
+import FetchLatestId from './latestId';
+import { createDarta } from "./utils/api";
+import axios from 'axios';
 
 const CreateDarta = () => {
-
   const [formData, setFormData] = useState({
     subject: "",
     sender_name: "",
+    remarks: "",
     received_date: "",
     letter_no: "",
     letter_date: "",
     document_type: "",
     document_file: "",
-    status: "Pending",
+    status: "",
     sender_office: "",
     receiver_office: "",
   });
 
   const [nepaliDate, setNepaliDate] = useState('');
+  const [dartaNo, setDartaNo] = useState('');
+  const [senders, setSenders] = useState([]);
+  const [error, setError] = useState('');
+
+  const handleDartaNoFetched = (newDartaNo) => {
+    setDartaNo(newDartaNo);
+  }
 
   useEffect(() => {
     const today = new NepaliDate();
     setNepaliDate(today.format('YYYY-MM-DD'));
+
+    const fetchSenderData = async () => {
+      try {
+        const response = await axios.get('/api/v1/sender_office/');
+        setSenders(response.data);
+      } catch (error) {
+        console.error("Error fetching sender data:", error);
+        setError("Failed to fetch sender data");
+      }
+    };
+
+    fetchSenderData();
   }, []);
 
   const handleChange = (e) => {
     const { name, value, type, files, selectedOptions } = e.target;
-    
-  
+
     if (type === "select-multiple") {
       setFormData((prev) => ({
         ...prev,
@@ -51,183 +72,242 @@ const CreateDarta = () => {
       letter_date: e.target.value,
     }));
   };
-
-  const handleReceiverChange = (receiverOffices) => {
-    setFormData((prev) => ({
-      ...prev,
-      receiver_office: receiverOffices,
-    }));
-  };
-
-  const handleSenderChange = (senderOffices) => {
+  const handleSenderOfficeChange = (senderOffices) => {
+    console.log('Selected sender office:', senderOffices); // Ensure the value is being correctly passed
     setFormData((prev) => ({
       ...prev,
       sender_office: senderOffices,
     }));
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    const data = new FormData();
-    Object.keys(formData).forEach((key) => {
-      if (formData[key] !== null && formData[key] !== "") {
-        data.append(key, formData[key]);
-      }
-    });
-
-    try {
-      await axiosInstance.post("/darta/", data, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
-      alert("Darta created successfully!");
-    } catch (error) {
-      console.error("Error:", error.response?.data || error.message);
-      alert(`Failed to create Darta: ${error.response?.data || error.message}`);
-    }
+  const handleSenderChange = (senderOffices, senderName) => {
+    setFormData((prev) => ({
+      ...prev,
+      sender_office: senderOffices,
+      sender_name: senderName,  
+    }));
+  };
+  
+  const handleReceiverChange = (receiverOffices, receiverName) => {
+    setFormData((prev) => ({
+      ...prev,
+      receiver_office: receiverOffices,
+      receiver_name: receiverName,  
+    }));
   };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+  
+    const formToSubmit = new FormData();
+    Object.keys(formData).forEach((key) => {
+      if (formData[key] !== null && formData[key] !== "") {
+        formToSubmit.append(key, formData[key]);
+      }
+    });
+  
+    try {
+      const response = await createDarta(formToSubmit);
+      console.log("Darta created successfully:", response);
+      alert("Darta created successfully!");
+    } catch (error) {
+      console.error("Error during Darta creation:", error.message || error);
+      setError("Error creating Darta. Please try again.");
+    }
+  };
+  
+
   return (
-    <div className="max-w-2xl mx-auto p-6 bg-gray-50 shadow-md rounded-md">
-      <h1 className="text-2xl font-bold text-center mb-6">Create Darta</h1>
-      <form
-        onSubmit={handleSubmit}
-        encType="multipart/form-data"
-        className="space-y-4"
-      >
-        <div>
-          <label className="block text-sm font-medium text-gray-700">Subject</label>
+    <div className="max-w-3xl mx-auto">
+      <h1 className="text-3xl font-extrabold text-center text-blue-700 mb-8">
+        Create Darta
+      </h1>
+      <form onSubmit={handleSubmit} encType="multipart/form-data" className="space-y-4">
+        <FetchLatestId onDartaNoFetched={handleDartaNoFetched} />
+
+        <div className='flex'>
+          <label className="block text-md font-semibold text-gray-700 p-3 w-1/6">
+            दर्ता नं
+          </label>
           <input
             type="text"
-            name="subject"
-            value={formData.subject}
+            name="dartaNo"
+            value={dartaNo}
             onChange={handleChange}
-            className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
-            required
-          />
-          <label className="block text-sm font-bold text-gray-700">दर्ता नं</label>
-          
-          <input
-            type="text"
-            name="DartaNo"
-            value={formData.subject}
-            onChange={handleChange}
-            placeholder='99999'
-            className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+            className="mt-2 w-3/4 p-1 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none"
             required
             readOnly
           />
         </div>
 
-        <div>
-          <label className="block text-sm font-medium text-gray-700">Sender Name</label>
-          <input
-            type="text"
-            name="sender_name"
-            value={formData.sender_name}
-            onChange={handleChange}
-            className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
-            required
-          />
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium text-gray-700">Received Date</label>
-          <DateInput
-            id="received_date"
-            name="received_date"
-            value={formData.received_date}
-            onChange={handleDateChange}
-            className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
-            required
-          />
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium text-gray-700">Letter No</label>
-          <input
-            type="text"
-            name="letter_no"
-            value={formData.letter_no}
-            onChange={handleChange}
-            className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
-            required
-          />
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium text-gray-700">Letter Date</label>
+        <div className='flex'>
+          <label className="block text-md font-semibold text-gray-700 p-3 w-1/6">
+            दर्ता मिति
+          </label>
           <input
             id="letter_date"
             name="letter_date"
             value={nepaliDate}
             onChange={handleDateChange}
-            className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+            className="mt-2 w-3/4 p-1 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none"
             required
             readOnly
           />
         </div>
 
-        <div>
-          <label className="block text-sm font-medium text-gray-700">Document Type</label>
-          <select
-            name="document_type"
-            value={formData.document_type}
+        <div className='flex'>
+          <label className="block text-md font-semibold text-gray-700 p-3 w-1/8">
+            पठाउने कार्यालय
+          </label>
+          <FetchSenderList
+            type="text"
+            name="sender_office"
+            value={formData.sender_office}
             onChange={handleChange}
-            className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
-          >
-            <option value="">Select Document Type</option>
-            <option value="1">Type 1</option>
-            <option value="2">Type 2</option>
-          </select>
+            className="mt-2 w-3/4 p-1 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none"
+            required
+            onSenderChange={handleSenderOfficeChange}
+          />
         </div>
 
-        <div>
-          <label className="block text-sm font-medium text-gray-700">Document File</label>
+        <div className='flex'>
+          <label className="block text-md font-semibold text-gray-700 p-3 w-1/8">
+            पठाउने व्यक्ति को नाम
+          </label>
           <input
-            type="file"
-            name="document_file"
+            type="text"
+            name="sender_name"  
+            value={formData.sender_name}
             onChange={handleChange}
-            className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+            className="mt-2 w-3/4 p-1 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none"
+            placeholder='Sender Name'
             required
           />
         </div>
 
-        <div>
-          <label className="block text-sm font-medium text-gray-700">Status</label>
-          <select
-            name="status"
-            value={formData.status}
+        <div className='flex'>
+          <label className="block text-md font-semibold text-gray-700 w-1/6 p-3">
+            पत्र मिति
+          </label>
+          <DateInput
+            id="received_date"
+            name="received_date"
+            value={formData.received_date}
+            onChange={handleDateChange}
+            className="mt-2 w-3/4 p-1 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none"
+            required
+          />
+        </div>
+
+        <div className='flex'>
+          <label className="block text-md font-semibold text-gray-700 p-3 w-1/6">विषय</label>
+          <input
+            type="text"
+            name="subject"
+            value={formData.subject}
             onChange={handleChange}
-            className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+            className="mt-2 w-3/4 p-1 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none"
+            placeholder='Subject'
+            required
+          />
+        </div>
+
+
+
+        <div className='flex'>
+          <label className="block text-md font-semibold text-gray-700 p-3 w-1/6">
+            पत्र नं
+          </label>
+          <input
+            type="text"
+            name="letter_no"
+            value={formData.letter_no}
+            onChange={handleChange}
+            className="mt-2 w-3/4 p-1 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none"
+            placeholder='Letter Number'
+            required
+          />
+        </div>
+
+        <div className="flex">
+          <label className="block text-md font-semibold text-gray-700 p-3 w-1/8">
+            डॉकुमेन्ट प्रकार
+          </label>
+          <select
+            name="document_type"
+            value={formData.document_type}
+            onChange={handleChange}
+            className="mt-2 w-3/4 p-1 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none"
           >
-            <option value="Pending">Pending</option>
-            <option value="Sent">Sent</option>
-            <option value="Delivered">Delivered</option>
+            <option value="">Select Document Type</option>
+            <option value="पत्र">पत्र</option>
+            <option value="टिप्पणी">टिप्पणी</option>
           </select>
         </div>
 
-        <div>
-          <label className="block text-sm font-medium text-gray-700">Sender Office</label>
-              <FetchSenderList onSenderChange={handleSenderChange} />
+        <div className="flex">
+
+          <label className="block text-md font-semibold text-gray-700 p-3 w-1/6">
+            स्थिति
+          </label>
+          <div className="mt-2 p-1 w-3/4 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none">
+          <select name="status" onChange={handleChange}>
+            <option value="Pending">Pending</option>
+            <option value="Processed">Processed</option>
+          </select>
+          </div>
         </div>
 
-        <div>
-          <label className="block text-sm font-medium text-gray-700">Receiver Office</label>
-          <FetchReceiverList onReceiverChange={handleReceiverChange} />
+        <div className='flex'>
+          <label className="block text-md font-semibold text-gray-700 p-3 w-1/6">
+            प्राप्तकर्ता कार्यालय
+          </label>
+          <div className="mt-2 w-3/4">
+          <FetchReceiverList
+            type="text"
+            name="receiver_name"
+            value={formData.receiver_name}
+            onChange={handleChange}
+            required
+            onReceiverChange={handleReceiverChange}
+          />
+          </div>
+        </div>
+
+        <div className='flex'>
+          <label className="block text-md font-semibold text-gray-700 p-3 w-1/6">टिप्पणी</label>
+          <input
+            type="text"
+            name="remarks"
+            value={formData.remarks}
+            onChange={handleChange}
+            className="mt-2 w-3/4 p-1 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none"
+            placeholder='Remarks'
+            required
+          />
+        </div>
+
+        <div className='flex'>
+          <label className="block text-md font-semibold text-gray-700 p-3 w-1/8">
+            डॉकुमेन्ट फाइल
+          </label>
+          <input
+            type="file"
+            name="document_file"
+            onChange={handleChange}
+            className="mt-2 w-3/4 p-1 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none"
+            required
+          />
         </div>
 
         <button
           type="submit"
-          className="w-full bg-blue-500 text-white font-bold py-2 px-4 rounded-md shadow hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"
+          className="w-full bg-blue-600 text-white font-bold py-3 px-6 rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 transition duration-200"
         >
           Save
         </button>
       </form>
     </div>
-  
   );
 };
 

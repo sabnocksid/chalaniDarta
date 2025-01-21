@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { createChalanis } from "./utils/api";
 import DateInput from "../home/UI/Datepicker";
+import FetchLatestId from './latestId';
 import FetchReceiverList from "../Receiver/FetchReceiverList";
 
 const CreateChalaniForm = () => {
+  const [chalaniNo, setChalaniNo] = useState("");
   const [formData, setFormData] = useState({
     subject: "",
     receiver_name: "",
@@ -13,8 +15,12 @@ const CreateChalaniForm = () => {
     document_file: null,
     related_office: "",
   });
-
+  
   const [errorMessage, setErrorMessage] = useState("");
+
+  const handleChalaniNoFetched = (newChalaniNo) => {
+    setChalaniNo(newChalaniNo);
+  };
 
   const handleChange = (e) => {
     const { name, value, type, files } = e.target;
@@ -27,7 +33,7 @@ const CreateChalaniForm = () => {
   const handleDateChange = (e) => {
     setFormData((prev) => ({
       ...prev,
-      sent_date: e.target.value,  
+      sent_date: e.target.value,
     }));
   };
 
@@ -57,52 +63,58 @@ const CreateChalaniForm = () => {
   };
 
   return (
-    <div className="max-w-lg mx-auto mt-8 p-6 bg-white shadow-lg rounded-lg">
-      <h2 className="text-2xl font-bold text-center text-gray-700 mb-6">
+    <div className="max-w-3xl mx-auto">
+      <h1 className="text-3xl font-extrabold text-center text-blue-700 mb-8">
         Create Chalani
-      </h2>
-      <form onSubmit={handleSubmit}>
-        <div className="mb-4">
-          <label
-            htmlFor="subject"
-            className="block text-sm font-medium text-gray-700 mb-1"
-          >
-            Subject
+      </h1>
+      <form onSubmit={handleSubmit} encType="multipart/form-data" className="space-y-4">
+        <FetchLatestId onChalaniNoFetched={handleChalaniNoFetched} />
+        <div className="flex">
+          <label className="block text-md font-semibold text-gray-700 p-3 w-1/6">
+            चलानी नं
           </label>
           <input
             type="text"
-            id="subject"
-            name="subject"
-            value={formData.subject}
+            name="chalaniNo"
+            value={chalaniNo}
             onChange={handleChange}
-            required
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
+            className="mt-2 w-3/4 p-1 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none"
+            readOnly
           />
         </div>
 
-        <div className="mb-4">
-          <label
-            htmlFor="receiver_name"
-            className="block text-sm font-medium text-gray-700 mb-1"
-          >
+        <div className="flex">
+          <label className="block text-md font-semibold text-gray-700 p-3 w-1/6">
+            विषय
+          </label>
+          <input
+            type="text"
+            name="subject"
+            value={formData.subject}
+            onChange={handleChange}
+            className="mt-2 w-3/4 p-1 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none"
+            placeholder="Subject"
+            required
+          />
+        </div>
+
+        <div className="flex">
+          <label className="block text-md font-semibold text-gray-700 p-3 w-1/6">
             Receiver Name
           </label>
           <input
             type="text"
-            id="receiver_name"
             name="receiver_name"
             value={formData.receiver_name}
             onChange={handleChange}
+            className="mt-2 w-3/4 p-1 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none"
+            placeholder="Receiver Name"
             required
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
           />
         </div>
 
-        <div className="mb-4">
-          <label
-            htmlFor="sent_date"
-            className="block text-sm font-medium text-gray-700 mb-1"
-          >
+        <div className="flex">
+          <label className="block text-md font-semibold text-gray-700 p-3 w-1/6">
             Sent Date
           </label>
           <DateInput
@@ -110,68 +122,65 @@ const CreateChalaniForm = () => {
             name="sent_date"
             value={formData.sent_date}
             onChange={handleDateChange}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
+            className="mt-2 w-3/4 p-1 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none"
+            required
           />
         </div>
 
-        <div className="mb-4">
-          <label
-            htmlFor="document_type"
-            className="block text-sm font-medium text-gray-700 mb-1"
-          >
+        <div className="flex">
+          <label className="block text-md font-semibold text-gray-700 p-3 w-1/6">
             Document Type
           </label>
-          <input
-            type="number"
-            id="document_type"
+          <select
             name="document_type"
             value={formData.document_type}
             onChange={handleChange}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
-          />
+            className="mt-2 w-3/4 p-1 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none"
+            required
+          >
+            <option value="">Select Document Type</option>
+            <option value="1">Type 1</option>
+            <option value="2">Type 2</option>
+          </select>
         </div>
 
-        <div className="mb-4">
-          <label
-            htmlFor="status"
-            className="block text-sm font-medium text-gray-700 mb-1"
-          >
+        <div className="flex">
+          <label className="block text-md font-semibold text-gray-700 p-3 w-1/6">
             Status
           </label>
-          <input
-            type="text"
-            id="status"
+          <select
             name="status"
             value={formData.status}
             onChange={handleChange}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
+            className="mt-2 w-3/4 p-1 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none"
+            required
+          >
+            <option value="Pending">Pending</option>
+          </select>
+        </div>
+
+        <div className="flex">
+          <label className="block text-md font-semibold text-gray-700 p-3 w-1/6">
+            Related Office
+          </label>
+          <FetchReceiverList
+            onReceiverChange={handleReceiverChange}
+            className="mt-2 w-3/4 p-1 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none"
+            required
           />
         </div>
 
-        <div className="mb-4">
-          <label
-            htmlFor="document_file"
-            className="block text-sm font-medium text-gray-700 mb-1"
-          >
+        <div className="flex">
+          <label className="block text-md font-semibold text-gray-700 p-3 w-1/6">
             Document File
           </label>
           <input
             type="file"
-            id="document_file"
             name="document_file"
             onChange={handleChange}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
+            className="mt-2 w-3/4 p-1 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none"
+            required
           />
-        </div>
-
-        <div className="mb-4">
-          <label
-            htmlFor="related_office"
-            className="block text-sm font-medium text-gray-700 mb-1"
-          >
-            Related Office
-          </label>
-          <FetchReceiverList onReceiverChange={handleReceiverChange}/>
         </div>
 
         {errorMessage && (
@@ -182,7 +191,7 @@ const CreateChalaniForm = () => {
 
         <button
           type="submit"
-          className="w-full bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+          className="w-full bg-blue-600 text-white font-bold py-3 px-6 rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 transition duration-200"
         >
           Create Chalani
         </button>

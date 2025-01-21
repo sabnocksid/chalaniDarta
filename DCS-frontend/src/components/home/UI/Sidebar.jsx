@@ -30,11 +30,11 @@ const Sidebar = () => {
     else if (path === "/chalani") setActiveItem("chalani");
     else if (path === "/documents") setActiveItem("documents");
     else if (path === "/allDartaPapers") setActiveItem("allDartaPapers");
-    else if (path === "#allProcessDocuments") setActiveItem("allProcessDocuments");
-    else if (path === "#documentTypes") setActiveItem("documentTypes");
-    else if (path === "#financialYear") setActiveItem("financialYear");
-    else if (path === "#branch") setActiveItem("branch");
-    else if (path === "#office") setActiveItem("office");
+    // else if (path === "/") setActiveItem("allProcessDocuments");
+    // else if (path === "/") setActiveItem("documentTypes");
+    // else if (path === "/") setActiveItem("financialYear");
+    // else if (path === "/") setActiveItem("branch");
+    // else if (path === "") setActiveItem("office");
   }, [location]);
 
   return (

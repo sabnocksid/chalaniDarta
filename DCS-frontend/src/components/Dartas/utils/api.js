@@ -1,36 +1,23 @@
-const API_BASE_URL = "https://darta.bimal1412.com.np/api/v1/darta/";
+import axios from 'axios';
 
-export const fetchDartas = () => {
-  return fetch(API_BASE_URL)
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error(`Failed to fetch Dartas. Status: ${response.status}`);
-      }
-      return response.json();
-    })
-    .catch((error) => {
-      console.error("Error fetching Dartas:", error);
-      throw error;
-    });
-};
 
 export const createDarta = (formData) => {
-  return fetch(API_BASE_URL, {
+  return fetch("/api/v1/darta/", {
     method: "POST",
     body: formData,
   })
     .then((response) => {
-      console.log("Response Status:", response.status);
-      return response.json().then((data) => {
-        if (!response.ok) {
-          throw new Error(data.detail || "Failed to create Darta");
-        }
-        return data;
-      });
+      if (!response.ok) {
+        return response.json().then((data) => {
+          console.error("API Error:", data);  
+          throw new Error(data.detail || "Failed to create Chalani");
+        });
+      }
+      return response.json();  
     })
     .catch((error) => {
-      console.error("Error creating Darta:", error);
-      throw error;
+      console.error("Error creating Chalani:", error);
+      throw error;  
     });
 };
 
@@ -67,6 +54,24 @@ export const deleteDarta = (id) => {
     })
     .catch((error) => {
       console.error("Error deleting Darta:", error);
+      throw error;
+    });
+};
+
+export const fetchStatusChoices = () => {
+  return axios({
+    method: "OPTIONS",
+    url: API_BASE_URL,
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+    },
+  })
+    .then((response) => {
+      return response.data.status; 
+    })
+    .catch((error) => {
+      console.error("Error fetching status choices:", error);
       throw error;
     });
 };

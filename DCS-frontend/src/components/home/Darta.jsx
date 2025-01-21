@@ -209,6 +209,7 @@ const Darta = () => {
                     <th className="border px-4 py-2">स्थिति (Status)</th>
                     <th className="border px-4 py-2">पठाउने कार्यालयको नाम(Sender Office)</th>
                     <th className="border px-4 py-2">प्राप्तकर्ता कार्यालयको नाम(Receiver Office)</th>
+                    <th className="border px-4 py-2">File</th>
                     <th className="border px-4 py-2">कार्य (Actions)</th>
                   </tr>
                 </thead>
@@ -236,7 +237,6 @@ const Darta = () => {
                             'N/A'
                           )}
                         </td>
-                        <td className="border px-4 py-2">{item.related_office || 'N/A'}</td>
                         <td className="border px-4 py-2">
                           <button className="bg-blue-500 text-white font-bold p-1">View</button>
                           <button className="bg-green-500 text-white font-bold p-1 ml-2">Done</button>
@@ -255,37 +255,40 @@ const Darta = () => {
               </table>
             </div>
 
-            <div className="flex w-100 h-10 mt-10">
-              {Array.from({ length: totalPages }, (_, i) => (
-                <button
-                  key={i + 1}
-                  onClick={() => handlePageChange(i + 1)}
-                  className={`py-1 px-3 ml-2 rounded-lg font-bold ${
-                    currentPage === i + 1
-                      ? 'bg-cyan-500 text-white'
-                      : ' hover:bg-gray-400'
-                  }`}
-                >
-                  {i + 1}
-                </button>
-              ))}
-              <div className="items-center mt-1 space-x-2">
-                <button
-                  className={` text-gray-400 font-bold py-1 px-3 ml-2 rounded-sm ${currentPage === 1 ? 'opacity-50 cursor-not-allowed' : ''}`}
-                  onClick={() => handlePageChange(currentPage - 1)}
-                  disabled={currentPage === 1}
-                >
-                  Previous
-                </button>
-                <button
-                  className={`text-gray-400 font-bold py-1 px-3 rounded-sm ${currentPage === totalPages ? 'opacity-50 cursor-not-allowed' : ''}`}
-                  onClick={() => handlePageChange(currentPage + 1)}
-                  disabled={currentPage === totalPages}
-                >
-                  Next
-                </button>
-              </div>
-            </div>
+            <div className="flex w-full h-10 mt-10">
+  <button
+    className={`text-gray-400 font-bold py-1 px-3 ml-2 rounded-sm ${currentPage === 1 ? 'opacity-50 cursor-not-allowed' : ''}`}
+    onClick={() => handlePageChange(currentPage - 1)}
+    disabled={currentPage === 1}
+  >
+    Previous
+  </button>
+  {Array.from({ length: totalPages }, (_, i) => {
+    const startPage = Math.max(1, currentPage - 1);
+    const endPage = Math.min(totalPages, currentPage + 1);
+
+    if (i + 1 >= startPage && i + 1 <= endPage) {
+      return (
+        <button
+          key={i + 1}
+          onClick={() => handlePageChange(i + 1)}
+          className={`py-1 px-3 ml-2 rounded-lg font-bold ${currentPage === i + 1 ? 'bg-cyan-500 text-white' : ' hover:bg-gray-400'}`}
+        >
+          {i + 1}
+        </button>
+      );
+    }
+    return null;
+  })}
+
+  <button
+    className={`text-gray-400 font-bold py-1 px-3 ml-2 rounded-sm ${currentPage === totalPages ? 'opacity-50 cursor-not-allowed' : ''}`}
+    onClick={() => handlePageChange(currentPage + 1)}
+    disabled={currentPage === totalPages}
+  >
+    Next
+  </button>
+</div>
           </div>
         </>
       )}

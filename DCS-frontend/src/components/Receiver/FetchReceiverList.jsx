@@ -8,7 +8,7 @@ const FetchReceiverList = ({ onReceiverChange }) => {
     const [error, setError] = useState(null);
   
     useEffect(() => {
-      fetch("http://192.168.1.16:8000/api/v1/receiver_office/")
+      fetch("api/v1/receiver_office/")
         .then((response) => response.json())
         .then((json) => {
           setData(json);
@@ -30,7 +30,7 @@ const FetchReceiverList = ({ onReceiverChange }) => {
     }, [selectedOffices, onReceiverChange]);
   
     if (loading) {
-      return <p>Loading...</p>;
+      return <p  className="mt-2 w-3/4 p-1 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none">Loading...</p>;
     }
   
     if (error) {
@@ -48,20 +48,20 @@ const FetchReceiverList = ({ onReceiverChange }) => {
     };
   
     return (
-      <div>
+      <div className="w-full border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none">
         <select
-          className="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
-          onChange={(e) => {
+        onChange={(e) => {
             const selectedId = e.target.value;
             const selectedName = e.target.selectedOptions[0].text;
             handleSelect(selectedId, selectedName);
           }}
           value=""
+          className="w-full"
         >
           <option value="">Select Office</option>
           {values.length > 0 ? (
             values.map((item) => (
-              <option key={item.id} value={item.id}>
+              <option key={item.id} value={item.name} >
                 {item.name}
               </option>
             ))

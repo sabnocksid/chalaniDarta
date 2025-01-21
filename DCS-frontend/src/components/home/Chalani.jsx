@@ -66,6 +66,7 @@ const Chalani = () => {
               <tr className="bg-slate-300">
                 <th className="border px-4 py-2">क्र.स.</th>
                 <th className="border px-4 py-2">विषय (Subject)</th>
+                <th className="border px-4 py-2">प्राप्तकर्ता को नाम(Receiver)</th>
                 <th className="border px-4 py-2">पठाइएको मिति (Sent Date)</th>
                 <th className="border px-4 py-2">कागजात प्रकार (Document Type)</th>
                 <th className="border px-4 py-2">स्थिति (Status)</th>
@@ -110,36 +111,42 @@ const Chalani = () => {
           </table>
         </div>
 
-        {/* Pagination */}
-        <div className="flex w-full h-10 mt-10">
-          {Array.from({ length: totalPages }, (_, i) => (
-            <button
-              key={i + 1}
-              onClick={() => handlePageChange(i + 1)}
-              className={`py-1 px-3 ml-2 rounded-lg font-bold ${currentPage === i + 1 ? 'bg-cyan-500 text-white' : ' hover:bg-gray-400'}`}
-            >
-              {i + 1}
-            </button>
-          ))}
-          <div className="items-center mt-1 space-x-2">
-            <button
-              className={`text-gray-400 font-bold py-1 px-3 ml-2 rounded-sm ${currentPage === 1 ? 'opacity-50 cursor-not-allowed' : ''}`}
-              onClick={() => handlePageChange(currentPage - 1)}
-              disabled={currentPage === 1}
-            >
-              Previous
-            </button>
-            <button
-              className={`text-gray-400 font-bold py-1 px-3 rounded-sm ${currentPage === totalPages ? 'opacity-50 cursor-not-allowed' : ''}`}
-              onClick={() => handlePageChange(currentPage + 1)}
-              disabled={currentPage === totalPages}
-            >
-              Next
-            </button>
+  <div className="flex w-full h-10 mt-10">
+  <button
+    className={`text-gray-400 font-bold py-1 px-3 ml-2 rounded-sm ${currentPage === 1 ? 'opacity-50 cursor-not-allowed' : ''}`}
+    onClick={() => handlePageChange(currentPage - 1)}
+    disabled={currentPage === 1}
+  >
+    Previous
+  </button>
+  {Array.from({ length: totalPages }, (_, i) => {
+    const startPage = Math.max(1, currentPage - 1);
+    const endPage = Math.min(totalPages, currentPage + 1);
+
+    if (i + 1 >= startPage && i + 1 <= endPage) {
+      return (
+        <button
+          key={i + 1}
+          onClick={() => handlePageChange(i + 1)}
+          className={`py-1 px-3 ml-2 rounded-lg font-bold ${currentPage === i + 1 ? 'bg-cyan-500 text-white' : ' hover:bg-gray-400'}`}
+        >
+          {i + 1}
+        </button>
+      );
+    }
+    return null;
+  })}
+
+  <button
+    className={`text-gray-400 font-bold py-1 px-3 ml-2 rounded-sm ${currentPage === totalPages ? 'opacity-50 cursor-not-allowed' : ''}`}
+    onClick={() => handlePageChange(currentPage + 1)}
+    disabled={currentPage === totalPages}
+  >
+    Next
+  </button>
+</div>
           </div>
         </div>
-      </div>
-    </div>
   );
 };
 
