@@ -1,30 +1,30 @@
 import React, { useState } from 'react';
-import { deleteDarta } from './utils/api'; 
+import { deleteChalani } from './utils/api';
 
-const DeleteDarta = ({ id }) => {
+const RemoveChalani = ({ id }) => {
   const [loading, setLoading] = useState(false);
 
   const handleDelete = () => {
     setLoading(true);
-    deleteDarta(id)
+    deleteChalani(id)
       .then(() => {
         setLoading(false);
-        alert('Darta deleted successfully!');
+        alert('Chalani deleted successfully!');
       })
       .catch((error) => {
         setLoading(false);
-        alert('Error deleting Darta.');
+        alert('Error deleting Chalani.');
       });
   };
 
   return (
     <div>
-      <h3>Are you sure you want to delete this Darta?</h3>
+      <h3>Are you sure you want to delete this Chalani?</h3>
       <button onClick={handleDelete} disabled={loading}>
-        {loading ? 'Deleting...' : 'Delete Darta'}
+        {loading ? 'Deleting...' : 'Delete Chalani'}
       </button>
     </div>
   );
 };
 
-export default DeleteDarta;
+export default RemoveChalani;

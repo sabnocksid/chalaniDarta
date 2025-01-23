@@ -11,6 +11,7 @@ import Darta from "./components/home/Darta";
 import Search from "./components/home/search";
 import AddDarta from "./components/Dartas/createDarta";
 import DartaRemove from "./components/Dartas/removeDarta";
+import RemoveChalani from "./components/Chalanis/removeChalani";
 import LogIn from "./components/Login/login";
 import AddSenderForm from "./components/Sender/AddSender";
 import FiscalYearDarta from "./components/FiscalYear/filterFiscalYear";
@@ -62,6 +63,7 @@ function App() {
                     <Route path="/darta" element={<ProtectedRoute element={<Darta />} />} />
                     <Route path="/addDarta" element={<ProtectedRoute element={<AddDarta />} />} />
                     <Route path="/removeDarta/:id" element={<ProtectedRoute element={<DartaRemove />} />} />
+                    <Route path="/deleteChalani/:id" element={<ProtectedRoute element={<RemoveChalani />} />} />
                     <Route path="/search" element={<ProtectedRoute element={<Search />} />} />
                     <Route path="/allDartaPapers" element={<ProtectedRoute element={<Home />} />} />
                     <Route path="/addSender" element={<ProtectedRoute element={<AddSenderForm />} />} />

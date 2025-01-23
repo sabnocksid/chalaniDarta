@@ -18,15 +18,15 @@ const Chalani = () => {
         return response.json();
       })
       .then((data) => {
-        setTableData(data); 
-        setLoading(false);   
+        setTableData(data);
+        setLoading(false);
       })
       .catch((error) => {
-        setError(error.message); 
+        setError(error.message);
         setLoading(false);
         console.error('Error fetching data:', error);
       });
-  }, []); 
+  }, []);
 
   const indexOfLastRow = currentPage * rowsPerPage;
   const indexOfFirstRow = indexOfLastRow - rowsPerPage;
@@ -69,7 +69,6 @@ const Chalani = () => {
                 <th className="border px-4 py-2">पठाइएको मिति (Sent Date)</th>
                 <th className="border px-4 py-2">कागजात प्रकार (Document Type)</th>
                 <th className="border px-4 py-2">स्थिति (Status)</th>
-                <th className="border px-4 py-2">डॉकुमेन्ट फाइल (Document File)</th>
                 <th className="border px-4 py-2">सम्बन्धित कार्यालय (Related Office)</th>
                 <th className="border px-4 py-2">कार्य</th>
               </tr>
@@ -92,13 +91,23 @@ const Chalani = () => {
                     <td className="border px-4 py-2">{item.sent_date || 'N/A'}</td>
                     <td className="border px-4 py-2">{item.document_type || 'N/A'}</td>
                     <td className="border px-4 py-2">{item.status || 'N/A'}</td>
-                    <td className="border px-4 py-2">{item.document_file || 'N/A'}</td>
                     <td className="border px-4 py-2">{item.related_office || 'N/A'}</td>
-                    <td className="border px-4 py-2">
-                      <Link to={`/`} className="bg-blue-500 text-white font-bold p-1">View</Link>
-                      <Link to={`/`} className="bg-green-500 text-white font-bold p-1 ml-2">Done</Link>
-                      <Link to={`/`} className="bg-red-500 text-white font-bold p-1 ml-2">Delete</Link>
-                    </td>
+                    <td className=" px-20 py-2 flex">
+                      {item.document_file ? (
+                        <a href={item.document_file} target="_blank" rel="noopener noreferrer" className="text-blue-500">
+                          <button className="bg-blue-500 text-white font-bold p-1">View</button>
+
+                        </a>
+                      ) : (
+                        <button className="bg-yellow-500 text-white font-bold p-1">View</button>
+                      )}
+                      <button className="bg-green-500 text-white font-bold p-1 ml-2">Done</button>
+                      <Link to={`/deleteChalani/${item.id}`}>
+                        <button className="bg-red-500 text-white font-bold p-1 ml-2">
+                          Delete
+                        </button>
+                      </Link>                        
+                      </td>
                   </tr>
                 ))
               ) : (
@@ -110,42 +119,42 @@ const Chalani = () => {
           </table>
         </div>
 
-  <div className="flex w-full h-10 mt-10">
-  <button
-    className={`text-gray-400 font-bold py-1 px-3 ml-2 rounded-sm ${currentPage === 1 ? 'opacity-50 cursor-not-allowed' : ''}`}
-    onClick={() => handlePageChange(currentPage - 1)}
-    disabled={currentPage === 1}
-  >
-    Previous
-  </button>
-  {Array.from({ length: totalPages }, (_, i) => {
-    const startPage = Math.max(1, currentPage - 1);
-    const endPage = Math.min(totalPages, currentPage + 1);
+        <div className="flex w-full h-10 mt-10">
+          <button
+            className={`text-gray-400 font-bold py-1 px-3 ml-2 rounded-sm ${currentPage === 1 ? 'opacity-50 cursor-not-allowed' : ''}`}
+            onClick={() => handlePageChange(currentPage - 1)}
+            disabled={currentPage === 1}
+          >
+            Previous
+          </button>
+          {Array.from({ length: totalPages }, (_, i) => {
+            const startPage = Math.max(1, currentPage - 1);
+            const endPage = Math.min(totalPages, currentPage + 1);
 
-    if (i + 1 >= startPage && i + 1 <= endPage) {
-      return (
-        <button
-          key={i + 1}
-          onClick={() => handlePageChange(i + 1)}
-          className={`py-1 px-3 ml-2 rounded-lg font-bold ${currentPage === i + 1 ? 'bg-cyan-500 text-white' : ' hover:bg-gray-400'}`}
-        >
-          {i + 1}
-        </button>
-      );
-    }
-    return null;
-  })}
+            if (i + 1 >= startPage && i + 1 <= endPage) {
+              return (
+                <button
+                  key={i + 1}
+                  onClick={() => handlePageChange(i + 1)}
+                  className={`py-1 px-3 ml-2 rounded-lg font-bold ${currentPage === i + 1 ? 'bg-cyan-500 text-white' : ' hover:bg-gray-400'}`}
+                >
+                  {i + 1}
+                </button>
+              );
+            }
+            return null;
+          })}
 
-  <button
-    className={`text-gray-400 font-bold py-1 px-3 ml-2 rounded-sm ${currentPage === totalPages ? 'opacity-50 cursor-not-allowed' : ''}`}
-    onClick={() => handlePageChange(currentPage + 1)}
-    disabled={currentPage === totalPages}
-  >
-    Next
-  </button>
-</div>
-          </div>
+          <button
+            className={`text-gray-400 font-bold py-1 px-3 ml-2 rounded-sm ${currentPage === totalPages ? 'opacity-50 cursor-not-allowed' : ''}`}
+            onClick={() => handlePageChange(currentPage + 1)}
+            disabled={currentPage === totalPages}
+          >
+            Next
+          </button>
         </div>
+      </div>
+    </div>
   );
 };
 

@@ -164,7 +164,7 @@ const DartaChalani = () => {
     कारबाही नभएका पत्रहरू
   </button>
   <button
-    onClick={() => setSelectedStatus('Shipped')}
+    onClick={() => setSelectedStatus('Processed')}
     className="bg-blue-700 text-white p-2  ml-3 rounded-md hover:bg-black"
   >
     कारबाही भएका पत्रहरू

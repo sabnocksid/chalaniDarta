@@ -19,6 +19,23 @@ export const createChalanis = (formData) => {
       throw error;  
     });
 };
+export const deleteChalani = async (id) => {
+  const response = await fetch(`/api/chalani/${id}`, {
+    method: 'DELETE',
+  });
+
+  if (!response.ok) {
+    const errorMessage = await response.text();  
+    throw new Error(errorMessage || 'Failed to delete Chalani');
+  }
+
+  try {
+    return await response.json();
+  } catch (error) {
+    console.error('Error parsing JSON response:', error);
+    return {};
+  }
+}
 
 export const fetchDropdownOptions = async () => {
   try {

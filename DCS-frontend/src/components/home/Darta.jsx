@@ -205,11 +205,9 @@ const Darta = () => {
                     <th className="border px-4 py-2">पत्र नं (Letter no.)</th>
                     <th className="border px-4 py-2">पत्र मिति (Letter Date)</th>
                     <th className="border px-4 py-2">डॉकुमेन्ट प्रकार (Document Type)</th>
-                    <th className="border px-4 py-2">डॉकुमेन्ट फाइल (Document File)</th>
                     <th className="border px-4 py-2">स्थिति (Status)</th>
                     <th className="border px-4 py-2">पठाउने कार्यालयको नाम(Sender Office)</th>
                     <th className="border px-4 py-2">प्राप्तकर्ता कार्यालयको नाम(Receiver Office)</th>
-                    <th className="border px-4 py-2">File</th>
                     <th className="border px-4 py-2">कार्य (Actions)</th>
                   </tr>
                 </thead>
@@ -224,21 +222,18 @@ const Darta = () => {
                         <td className="border px-4 py-2">{item.letter_no || 'N/A'}</td>
                         <td className="border px-4 py-2">{item.letter_date || 'N/A'}</td>
                         <td className="border px-4 py-2">{item.document_type || 'N/A'}</td>
-                        <td className="border px-4 py-2">{item.document_file || 'N/A'}</td>
                         <td className="border px-4 py-2">{item.status || 'N/A'}</td>
                         <td className="border px-4 py-2">{item.sender_office || 'N/A'}</td>
                         <td className="border px-4 py-2">{item.receiver_office || 'N/A'}</td>
-                        <td className="border px-4 py-2">
+                        <td className=" px-20 py-2 flex">
                           {item.document_file ? (
                             <a href={item.document_file} target="_blank" rel="noopener noreferrer" className="text-blue-500">
-                              View File
-                            </a>
+                        <button className="bg-blue-500 text-white font-bold p-1">View</button>
+
+                        </a>
                           ) : (
-                            'N/A'
+                            <button className="bg-yellow-500 text-white font-bold p-1">View</button>
                           )}
-                        </td>
-                        <td className="border px-4 py-2">
-                          <button className="bg-blue-500 text-white font-bold p-1">View</button>
                           <button className="bg-green-500 text-white font-bold p-1 ml-2">Done</button>
                           <button className="bg-red-500 text-white font-bold p-1 ml-2">Delete</button>
                         </td>

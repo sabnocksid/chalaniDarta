@@ -29,10 +29,9 @@ const CreateDarta = () => {
   const [error, setError] = useState('');
   const [isModalOpen, setModalOpen] = useState(false);
 
-
   const handleDartaNoFetched = (newDartaNo) => {
     setDartaNo(newDartaNo);
-  }
+  };
 
   useEffect(() => {
     const today = new NepaliDate();
@@ -74,8 +73,9 @@ const CreateDarta = () => {
       letter_date: e.target.value,
     }));
   };
+
   const handleSenderOfficeChange = (senderOffices) => {
-    console.log('Selected sender office:', senderOffices); // Ensure the value is being correctly passed
+    console.log('Selected sender office:', senderOffices);
     setFormData((prev) => ({
       ...prev,
       sender_office: senderOffices,
@@ -89,7 +89,7 @@ const CreateDarta = () => {
       sender_name: senderName,  
     }));
   };
-  
+
   const handleReceiverChange = (receiverOffices, receiverName) => {
     setFormData((prev) => ({
       ...prev,
@@ -121,7 +121,6 @@ const CreateDarta = () => {
   const closeModal = () => {
     setModalOpen(false);
   };
-  
 
   return (
     <div className="max-w-3xl mx-auto">
@@ -162,7 +161,7 @@ const CreateDarta = () => {
         </div>
 
         <div className='flex'>
-          <label className="block text-md font-semibold text-gray-700 p-3 w-1/8">
+          <label className="block text-md font-semibold text-gray-700 p-3 w-1/6">
             पठाउने कार्यालय
           </label>
           <FetchSenderList
@@ -176,7 +175,7 @@ const CreateDarta = () => {
         </div>
 
         <div className='flex'>
-          <label className="block text-md font-semibold text-gray-700 w-1/6 p-3">
+          <label className="block text-md font-semibold text-gray-700 p-3 w-1/6">
             पठाउने व्यक्ति 
           </label>
           <input
@@ -190,18 +189,19 @@ const CreateDarta = () => {
           />
         </div>
 
-
-          <DateInput
-            id="received_date"
-            name="received_date"
-            value={formData.received_date}
-            onChange={handleDateChange}
-            className="mt-2 w-3/4 p-1 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none"
-            required
-          />
+        <DateInput
+          id="received_date"
+          name="received_date"
+          value={formData.received_date}
+          onChange={handleDateChange}
+          className="mt-2 w-3/4 p-1 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none"
+          required
+        />
 
         <div className='flex'>
-          <label className="block text-md font-semibold text-gray-700 p-3 w-1/6">विषय</label>
+          <label className="block text-md font-semibold text-gray-700 p-3 w-1/6">
+            विषय
+          </label>
           <input
             type="text"
             name="subject"
@@ -212,8 +212,6 @@ const CreateDarta = () => {
             required
           />
         </div>
-
-
 
         <div className='flex'>
           <label className="block text-md font-semibold text-gray-700 p-3 w-1/6">
@@ -247,15 +245,14 @@ const CreateDarta = () => {
         </div>
 
         <div className="flex">
-
           <label className="block text-md font-semibold text-gray-700 p-3 w-1/6">
             स्थिति
           </label>
           <div className="mt-2 p-1 w-3/4 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none">
-          <select name="status" onChange={handleChange}>
-            <option value="Pending">Pending</option>
-            <option value="Processed">Processed</option>
-          </select>
+            <select name="status" onChange={handleChange}>
+              <option value="Pending">Pending</option>
+              <option value="Processed">Processed</option>
+            </select>
           </div>
         </div>
 
@@ -264,19 +261,21 @@ const CreateDarta = () => {
             प्राप्तकर्ता कार्यालय
           </label>
           <div className="mt-2 w-3/4">
-          <FetchReceiverList
-            type="text"
-            name="receiver_name"
-            value={formData.receiver_name}
-            onChange={handleChange}
-            required
-            onReceiverChange={handleReceiverChange}
-          />
+            <FetchReceiverList
+              type="text"
+              name="receiver_name"
+              value={formData.receiver_name}
+              onChange={handleChange}
+              required
+              onReceiverChange={handleReceiverChange}
+            />
           </div>
         </div>
 
         <div className='flex'>
-          <label className="block text-md font-semibold text-gray-700 p-3 w-1/6">टिप्पणी</label>
+          <label className="block text-md font-semibold text-gray-700 p-3 w-1/6">
+            टिप्पणी
+          </label>
           <input
             type="text"
             name="remarks"
@@ -308,6 +307,7 @@ const CreateDarta = () => {
           Save
         </button>
       </form>
+
       {isModalOpen && (
         <div className="fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center">
           <div className="bg-white rounded-lg shadow-lg w-96 p-6">
