@@ -15,7 +15,7 @@ const handleError = (error) => {
 
 export const createSender = async (formData) => {
   try {
-    const response = await axios.post("/api/v1/sender_office", formData);
+    const response = await axios.post("/api/v1/sender_office/", formData);
     return response.data;
   } catch (error) {
     handleError(error);

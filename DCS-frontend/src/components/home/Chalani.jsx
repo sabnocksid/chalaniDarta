@@ -10,7 +10,6 @@ const Chalani = () => {
   const rowsPerPage = 2;
 
   useEffect(() => {
-    // Perform the fetch request on component mount
     fetch('/api/v1/chalani/')
       .then((response) => {
         if (!response.ok) {
@@ -19,15 +18,15 @@ const Chalani = () => {
         return response.json();
       })
       .then((data) => {
-        setTableData(data); // Update tableData state
-        setLoading(false);   // Set loading to false after data is fetched
+        setTableData(data); 
+        setLoading(false);   
       })
       .catch((error) => {
-        setError(error.message); // Set error state if there is any
+        setError(error.message); 
         setLoading(false);
         console.error('Error fetching data:', error);
       });
-  }, []); // Empty dependency array ensures this runs only once on mount
+  }, []); 
 
   const indexOfLastRow = currentPage * rowsPerPage;
   const indexOfFirstRow = indexOfLastRow - rowsPerPage;

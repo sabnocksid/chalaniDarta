@@ -22,9 +22,9 @@ export const createChalanis = (formData) => {
 
 export const fetchDropdownOptions = async () => {
   try {
-    const response = await fetch("/api/v1/chalani/"); // Replace with your actual API endpoint
+    const response = await fetch("/api/v1/chalani/"); 
     const data = await response.json();
-    console.log("Dropdown options API response:", data); // Log the response
+    console.log("Dropdown options API response:", data); 
     if (!data.status_options || !data.related_office_options) {
       if (!data.status_options) console.warn("No status options found.");
       if (!data.related_office_options) console.warn("No related office options found.");

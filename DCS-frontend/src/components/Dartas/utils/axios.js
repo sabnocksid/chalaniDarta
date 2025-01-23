@@ -2,7 +2,7 @@
 import axios from 'axios';
 
 const axiosInstance = axios.create({
-  baseURL: 'https://darta.bimal1412.com.np/api/v1/', 
+  baseURL: 'http://52.66.247.124:2020/api/v1/', 
 });
 
 export default axiosInstance;

@@ -27,6 +27,8 @@ const CreateDarta = () => {
   const [dartaNo, setDartaNo] = useState('');
   const [senders, setSenders] = useState([]);
   const [error, setError] = useState('');
+  const [isModalOpen, setModalOpen] = useState(false);
+
 
   const handleDartaNoFetched = (newDartaNo) => {
     setDartaNo(newDartaNo);
@@ -109,11 +111,15 @@ const CreateDarta = () => {
     try {
       const response = await createDarta(formToSubmit);
       console.log("Darta created successfully:", response);
-      alert("Darta created successfully!");
+      setModalOpen(true);
     } catch (error) {
       console.error("Error during Darta creation:", error.message || error);
       setError("Error creating Darta. Please try again.");
     }
+  };
+
+  const closeModal = () => {
+    setModalOpen(false);
   };
   
 
@@ -164,15 +170,14 @@ const CreateDarta = () => {
             name="sender_office"
             value={formData.sender_office}
             onChange={handleChange}
-            className="mt-2 w-3/4 p-1 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none"
             required
             onSenderChange={handleSenderOfficeChange}
           />
         </div>
 
         <div className='flex'>
-          <label className="block text-md font-semibold text-gray-700 p-3 w-1/8">
-            पठाउने व्यक्ति को नाम
+          <label className="block text-md font-semibold text-gray-700 w-1/6 p-3">
+            पठाउने व्यक्ति 
           </label>
           <input
             type="text"
@@ -185,10 +190,7 @@ const CreateDarta = () => {
           />
         </div>
 
-        <div className='flex'>
-          <label className="block text-md font-semibold text-gray-700 w-1/6 p-3">
-            पत्र मिति
-          </label>
+
           <DateInput
             id="received_date"
             name="received_date"
@@ -197,7 +199,6 @@ const CreateDarta = () => {
             className="mt-2 w-3/4 p-1 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none"
             required
           />
-        </div>
 
         <div className='flex'>
           <label className="block text-md font-semibold text-gray-700 p-3 w-1/6">विषय</label>
@@ -307,6 +308,22 @@ const CreateDarta = () => {
           Save
         </button>
       </form>
+      {isModalOpen && (
+        <div className="fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center">
+          <div className="bg-white rounded-lg shadow-lg w-96 p-6">
+            <h2 className="text-lg font-bold mb-4">Success</h2>
+            <p className="text-gray-700 mb-6">Darta created successfully!</p>
+            <div className="flex justify-end">
+              <button
+                onClick={closeModal}
+                className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

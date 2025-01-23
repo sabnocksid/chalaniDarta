@@ -1,10 +1,11 @@
-import React, { useState } from "react";
-import axios from "axios";
+import React, { useState } from 'react';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';  
 
 const LogIn = () => {
-  const [formData, setFormData] = useState({ username: "", password: "" });
-  const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
+  const [formData, setFormData] = useState({ username: '', password: '' });
+  const [error, setError] = useState('');
+  const navigate = useNavigate();  
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -14,27 +15,14 @@ const LogIn = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post(
-        `https://darta.bimal1412.com.np/api/v1/login/`,
-        formData,
-        {
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        }
-      );
-
+      const response = await axios.post('/api/v1/login/', formData);
       const { token } = response.data;
 
-      localStorage.setItem("token", token);
+      localStorage.setItem('token', token);
 
-      setSuccess("Sign-in successful!");
-      setError("");
-
-      window.location.href = "/dashboard";
+      navigate('/dashboard');  
     } catch (err) {
-      setError(err.response?.data?.message || "Sign-in failed. Please try again.");
-      setSuccess("");
+      setError(err.response?.data?.message || 'Login failed');
     }
   };
 
@@ -48,8 +36,9 @@ const LogIn = () => {
           <h2 className="text-lg bg-blue-500 text-white font-semibold text-center py-4 rounded-t-lg">
             User Login
           </h2>
+          
           {error && <p className="text-sm text-red-500 text-center mt-2">{error}</p>}
-          {success && <p className="text-sm text-green-500 text-center mt-2">{success}</p>}
+
           <form onSubmit={handleSubmit}>
             <div className="p-4">
               <div className="mb-3">

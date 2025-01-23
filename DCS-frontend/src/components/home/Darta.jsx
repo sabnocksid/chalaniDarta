@@ -255,7 +255,7 @@ const Darta = () => {
               </table>
             </div>
 
-            <div className="flex w-full h-10 mt-10">
+          <div className="flex w-full h-10 mt-10">
   <button
     className={`text-gray-400 font-bold py-1 px-3 ml-2 rounded-sm ${currentPage === 1 ? 'opacity-50 cursor-not-allowed' : ''}`}
     onClick={() => handlePageChange(currentPage - 1)}

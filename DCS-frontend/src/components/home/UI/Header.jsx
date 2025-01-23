@@ -6,7 +6,7 @@ const Header = () => {
   
   const getPageTitle = (path) => {
     switch (path) {
-      case '/':
+      case '/dashboard':
         return <a className="text-blue-500 hover:underline cursor-pointer font-bold" href="/">Home</a>;
       case '/documents':
         return (
@@ -56,6 +56,38 @@ const Header = () => {
             <span className="font-bold text-sm text-gray-700">अग्रिम खोज रिपोर्ट</span>
           </span>
         );
+      case '/fiscalYear':
+        return (
+          <span>
+            <a className="text-blue-500 hover:underline cursor-pointer font-bold" href='/'>Home</a>
+            <span className="mx-3"> &gt; </span>
+            <span className="font-bold text-sm text-gray-700">आर्थिक वर्ष</span>
+          </span>
+        );
+        case '/documentType':
+          return (
+            <span>
+              <a className="text-blue-500 hover:underline cursor-pointer font-bold" href='/'>Home</a>
+              <span className="mx-3"> &gt; </span>
+              <span className="font-bold text-sm text-gray-700">कागजात को प्रकार</span>
+            </span>
+          );
+        case '/department':
+          return (
+            <span>
+              <a className="text-blue-500 hover:underline cursor-pointer font-bold" href='/'>Home</a>
+              <span className="mx-3"> &gt; </span>
+              <span className="font-bold text-sm text-gray-700">शाखा</span>
+            </span>
+          );
+        case '/office':
+          return (
+            <span>
+              <a className="text-blue-500 hover:underline cursor-pointer font-bold" href='/'>Home</a>
+              <span className="mx-3"> &gt; </span>
+              <span className="font-bold text-sm text-gray-700">कार्यालय</span>
+            </span>
+          );
       default:
         return <span>Page Not Found</span>;
     }

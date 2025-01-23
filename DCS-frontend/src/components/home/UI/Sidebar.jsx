@@ -7,8 +7,6 @@ import {
   FaUpload,
   FaFile,
   FaBook,
-  FaFolder,
-  FaFolderOpen,
   FaCalendarAlt,
   FaRegBuilding,
   FaMapMarkerAlt,
@@ -24,17 +22,15 @@ const Sidebar = () => {
 
   useEffect(() => {
     const path = location.pathname;
-    if (path === "/") setActiveItem("dashboard");
+    if (path === "/dashboard") setActiveItem("dashboard");
     else if (path === "/search") setActiveItem("search");
     else if (path === "/darta") setActiveItem("darta");
     else if (path === "/chalani") setActiveItem("chalani");
     else if (path === "/documents") setActiveItem("documents");
-    else if (path === "/allDartaPapers") setActiveItem("allDartaPapers");
-    // else if (path === "/") setActiveItem("allProcessDocuments");
-    // else if (path === "/") setActiveItem("documentTypes");
-    // else if (path === "/") setActiveItem("financialYear");
-    // else if (path === "/") setActiveItem("branch");
-    // else if (path === "") setActiveItem("office");
+    else if (path === "/documentType") setActiveItem("documentTypes");
+    else if (path === "/fiscalYear") setActiveItem("financialYear");
+    else if (path === "/department") setActiveItem("branch");
+    else if (path === "/office") setActiveItem("office");
   }, [location]);
 
   return (
@@ -54,7 +50,7 @@ const Sidebar = () => {
         <div className="bg-blue-700 text-center font-bold border-b-2 p-2">
           <h1 className="text-white">दर्ता चलानी System</h1>
         </div>
-        <div className="sidebar__header flex items-center p-2 bg-blue-700">
+        <div className="sidebar__header flex items-center p-4 bg-blue-700">
           <img src="Logo.png" alt="Logo" className="logoGOV w-12 h-12" />
           <h1 className="text-white font-bold text-xs ml-2">Government of Nepal</h1>
         </div>
@@ -62,7 +58,7 @@ const Sidebar = () => {
         <div className="sidebar-links">
           <ul className="flex flex-col">
             {[{
-              id: "dashboard", icon: <FaHome />, label: "ड्यासबोर्ड", link: "/"
+              id: "dashboard", icon: <FaHome />, label: "ड्यासबोर्ड", link: "/dashboard"
             }, {
               id: "search", icon: <FaSearch />, label: "कागजातको खोजी", link: "/search"
             }, {
@@ -72,21 +68,17 @@ const Sidebar = () => {
             }, {
               id: "documents", icon: <FaBook />, label: "सबै पत्रहरू", link: "/documents"
             }, {
-              id: "allRegisteredDocuments", icon: <FaFolder />, label: "सबै दर्ता पत्रहरू", link: "#allRegisteredDocuments"
+              id: "documentTypes", icon: <FaFile />, label: "कागजातको प्रकार", link: "/documentType"
             }, {
-              id: "allProcessDocuments", icon: <FaFolderOpen />, label: "सबै चलानी पत्रहरू", link: "#allProcessDocuments"
+              id: "financialYear", icon: <FaCalendarAlt />, label: "आर्थिक वर्ष", link: "/fiscalYear"
             }, {
-              id: "documentTypes", icon: <FaFile />, label: "कागजातको प्रकार", link: "#documentTypes"
+              id: "branch", icon: <FaRegBuilding />, label: "शाखा", link: "/department"
             }, {
-              id: "financialYear", icon: <FaCalendarAlt />, label: "आर्थिक वर्ष", link: "#financialYear"
-            }, {
-              id: "branch", icon: <FaRegBuilding />, label: "शाखा", link: "#branch"
-            }, {
-              id: "office", icon: <FaMapMarkerAlt />, label: "कार्यालय", link: "#office"
+              id: "office", icon: <FaMapMarkerAlt />, label: "कार्यालय", link: "/office"
             }].map(({ id, icon, label, link }) => (
               <li
                 key={id}
-                className={`border-y border-gray-300 text-md ${
+                className={`border-y border-gray-300 text-md p-1 ${
                   activeItem === id ? "bg-gray-800" : ""
                 }`}
               >

@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { FaSignOutAlt, FaBell } from "react-icons/fa";
+import { Link } from 'react-router-dom';
+
 
 const Navbar = () => {
   const [notificationCount, setNotificationCount] = useState(2);
@@ -26,10 +28,13 @@ const Navbar = () => {
         </div>
   </div>
   <div className="flex-none">
+  <Link to="/logout">
   <button className="flex items-center gap-2 text-white bg-blue-700 hover:bg-blue-800 py-2 px-4 rounded-md transition duration-200">
           <span className="hidden md:block">Logout</span>
           <FaSignOutAlt />
         </button>
+
+    </Link>
     </div>
 
 </div>

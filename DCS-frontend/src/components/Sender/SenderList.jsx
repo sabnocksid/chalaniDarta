@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { FaTimes } from 'react-icons/fa';
+import { FaTimes, FaPlus } from 'react-icons/fa';
 import AddSenderModal from "./AddSender"; // Make sure this import path is correct
 
 const FetchSenderList = ({ onSenderChange }) => {
@@ -58,6 +58,7 @@ const FetchSenderList = ({ onSenderChange }) => {
             handleSelect(selectedId, selectedName);
           }}
           value=""
+          className="w-full p-1 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none"
         >
           <option value="">Select Office</option>
           {data.length > 0 ? (
@@ -71,16 +72,11 @@ const FetchSenderList = ({ onSenderChange }) => {
           )}
         </select>
 
-        {/* Add Sender Button */}
-        <button
-          onClick={() => setIsModalOpen(true)}
-          className="bg-blue-600 text-white font-bold py-2 px-4 rounded-md"
-        >
-          Add Sender
-        </button>
+
+        <a href="/addSender" className="p-3"><FaPlus className="bg-blue-700 text-white rounded-md w-15 h-15"/></a>
+      
       </div>
 
-      {/* Selected Offices List */}
       {selectedOffices.length > 0 && (
         <div className="mt-4">
           <div className="flex flex-wrap gap-2">
@@ -103,7 +99,6 @@ const FetchSenderList = ({ onSenderChange }) => {
         </div>
       )}
 
-      <AddSenderModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </div>
   );
 };
