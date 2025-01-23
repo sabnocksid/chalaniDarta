@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "axios": "^1.7.9",
+    "@mui/x-date-pickers": "^6.0.0",
+    "@mui/x-date-pickers/AdapterDayjs": "^6.0.0",
+    "dayjs": "^1.11.0"
+  }
+}

@@ -1,7 +1,18 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
+import react from '@vitejs/plugin-react';
 
-// https://vite.dev/config/
-export default defineConfig({
+export default {
   plugins: [react()],
-})
+  base:'/',
+  server: {
+    proxy: {
+      '/api': 'http://52.66.247.124:2020/',
+    },
+    hmr: true, 
+    watch: {
+      usePolling: true, 
+    }
+  },
+  logLevel: 'info',
+};
+
+
